@@ -10,28 +10,148 @@
 
     <title>Vocabulary test</title>
 
-    <!-- Bootstrap
+    <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/languages.min.css" rel="stylesheet">
 
-    HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries
-    WARNING: Respond.js doesn't work if you view the page via file://
-    [if lt IE 9]>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]
-  -->
+    <![endif]-->
+
   </head>
   <body>
-    
-
-<!--
-    <h1>Hello, world!</h1>
-
-    jQuery (necessary for Bootstrap's JavaScript plugins)
+    <!-- Bootstrap -->
+    <!--jQuery (necessary for Bootstrap's JavaScript plugins)-->
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-    Include all compiled plugins (below), or include individual files as needed
+    <!--Include all compiled plugins (below), or include individual files as needed-->
     <script src="js/bootstrap.min.js"></script>
--->
+
+
+      <select class="form-control" id="sel1">
+          <option class="lang-sm lang-lbl-full" lang="ar"></option>
+          <option><span class="lang-sm lang-lbl-full" lang="be"></span></option>
+          <!--  <li><span class="lang-sm lang-lbl-full" lang="bg"></span></li>
+            <li><span class="lang-sm lang-lbl-full" lang="cs"></span></li>
+            <li><span class="lang-sm lang-lbl-full" lang="da"></span></li>
+            <li><span class="lang-sm lang-lbl-full" lang="de"></span></li>
+            <li><span class="lang-sm lang-lbl-full" lang="el"></span></li>
+            <li><span class="lang-sm lang-lbl-full" lang="en"></span></li>
+            <li><span class="lang-sm lang-lbl-full" lang="es"></span></li>
+            <li><span class="lang-sm lang-lbl-full" lang="et"></span></li>
+            <li><span class="lang-sm lang-lbl-full" lang="fi"></span></li>
+            <li><span class="lang-sm lang-lbl-full" lang="fr"></span></li>
+            <li><span class="lang-sm lang-lbl-full" lang="ga"></span></li>
+            <li><span class="lang-sm lang-lbl-full" lang="hi"></span></li>
+            <li><span class="lang-sm lang-lbl-full" lang="hr"></span></li>
+            <li><span class="lang-sm lang-lbl-full" lang="hu"></span></li>
+            <li><span class="lang-sm lang-lbl-full" lang="in"></span></li>
+            <li><span class="lang-sm lang-lbl-full" lang="is"></span></li>
+            <li><span class="lang-sm lang-lbl-full" lang="it"></span></li>
+            <li><span class="lang-sm lang-lbl-full" lang="iw"></span></li>
+            <li><span class="lang-sm lang-lbl-full" lang="ja"></span></li>
+            <li><span class="lang-sm lang-lbl-full" lang="ko"></span></li>
+            <li><span class="lang-sm lang-lbl-full" lang="lt"></span></li>
+            <li><span class="lang-sm lang-lbl-full" lang="lv"></span></li>
+            <li><span class="lang-sm lang-lbl-full" lang="mk"></span></li>
+            <li><span class="lang-sm lang-lbl-full" lang="mt"></span></li>
+            <li><span class="lang-sm lang-lbl-full" lang="nl"></span></li>
+            <li><span class="lang-sm lang-lbl-full" lang="no"></span></li>
+            <li><span class="lang-sm lang-lbl-full" lang="pl"></span></li>
+            <li><span class="lang-sm lang-lbl-full" lang="pt"></span></li>
+            <li><span class="lang-sm lang-lbl-full" lang="ro"></span></li>
+            <li><span class="lang-sm lang-lbl-full" lang="ru"></span></li>
+            <li><span class="lang-sm lang-lbl-full" lang="sk"></span></li>
+            <li><span class="lang-sm lang-lbl-full" lang="sl"></span></li>
+            <li><span class="lang-sm lang-lbl-full" lang="sq"></span></li>
+            <li><span class="lang-sm lang-lbl-full" lang="sr"></span></li>
+            <li><span class="lang-sm lang-lbl-full" lang="sv"></span></li>
+            <li><span class="lang-sm lang-lbl-full" lang="uk"></span></li>
+            <li><span class="lang-sm lang-lbl-full" lang="vi"></span></li>
+            <li><span class="lang-sm lang-lbl-full" lang="zh"></span></li>
+            <li><span class="lang-sm lang-lbl-full"></span></li> -->
+            </select>
+
+    <div class="container">
+      <div class="row">
+
+        <div class="btn-group dropdown">
+          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+            <span class="lang-sm lang-lbl-full"></span> <span class="caret"></span>
+          </button>
+          <ul class="dropdown-menu" role="menu">
+            <li><span class="lang-sm lang-lbl-full" lang="ar"></span></li>
+            <li><span class="lang-sm lang-lbl-full" lang="be"></span></li>
+            <li><span class="lang-sm lang-lbl-full" lang="bg"></span></li>
+            <li><span class="lang-sm lang-lbl-full" lang="cs"></span></li>
+            <li><span class="lang-sm lang-lbl-full" lang="da"></span></li>
+            <li><span class="lang-sm lang-lbl-full" lang="de"></span></li>
+            <li><span class="lang-sm lang-lbl-full" lang="el"></span></li>
+            <li><span class="lang-sm lang-lbl-full" lang="en"></span></li>
+            <li><span class="lang-sm lang-lbl-full" lang="es"></span></li>
+            <li><span class="lang-sm lang-lbl-full" lang="et"></span></li>
+            <li><span class="lang-sm lang-lbl-full" lang="fi"></span></li>
+            <li><span class="lang-sm lang-lbl-full" lang="fr"></span></li>
+            <li><span class="lang-sm lang-lbl-full" lang="ga"></span></li>
+            <li><span class="lang-sm lang-lbl-full" lang="hi"></span></li>
+            <li><span class="lang-sm lang-lbl-full" lang="hr"></span></li>
+            <li><span class="lang-sm lang-lbl-full" lang="hu"></span></li>
+            <li><span class="lang-sm lang-lbl-full" lang="in"></span></li>
+            <li><span class="lang-sm lang-lbl-full" lang="is"></span></li>
+            <li><span class="lang-sm lang-lbl-full" lang="it"></span></li>
+            <li><span class="lang-sm lang-lbl-full" lang="iw"></span></li>
+            <li><span class="lang-sm lang-lbl-full" lang="ja"></span></li>
+            <li><span class="lang-sm lang-lbl-full" lang="ko"></span></li>
+            <li><span class="lang-sm lang-lbl-full" lang="lt"></span></li>
+            <li><span class="lang-sm lang-lbl-full" lang="lv"></span></li>
+            <li><span class="lang-sm lang-lbl-full" lang="mk"></span></li>
+            <li><span class="lang-sm lang-lbl-full" lang="mt"></span></li>
+            <li><span class="lang-sm lang-lbl-full" lang="nl"></span></li>
+            <li><span class="lang-sm lang-lbl-full" lang="no"></span></li>
+            <li><span class="lang-sm lang-lbl-full" lang="pl"></span></li>
+            <li><span class="lang-sm lang-lbl-full" lang="pt"></span></li>
+            <li><span class="lang-sm lang-lbl-full" lang="ro"></span></li>
+            <li><span class="lang-sm lang-lbl-full" lang="ru"></span></li>
+            <li><span class="lang-sm lang-lbl-full" lang="sk"></span></li>
+            <li><span class="lang-sm lang-lbl-full" lang="sl"></span></li>
+            <li><span class="lang-sm lang-lbl-full" lang="sq"></span></li>
+            <li><span class="lang-sm lang-lbl-full" lang="sr"></span></li>
+            <li><span class="lang-sm lang-lbl-full" lang="sv"></span></li>
+            <li><span class="lang-sm lang-lbl-full" lang="uk"></span></li>
+            <li><span class="lang-sm lang-lbl-full" lang="vi"></span></li>
+            <li><span class="lang-sm lang-lbl-full" lang="zh"></span></li>
+            <li><span class="lang-sm lang-lbl-full"></span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <!--
+    <div class="container">
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-4"><p>Box 1</p></div>
+        <div class="col-xs-12 col-sm-6 col-md-4"><p>Box 2</p></div>
+        <div class="col-xs-12 col-sm-6 col-md-4"><p>Box 3</p></div>
+        <div class="col-xs-12 col-sm-6 col-md-4"><p>Box 4</p></div>
+        <div class="col-xs-12 col-sm-6 col-md-4"><p>Box 5</p></div>
+        <div class="col-xs-12 col-sm-6 col-md-4"><p>Box 6</p></div>
+        <div class="col-xs-12 col-sm-6 col-md-4"><p>Box 7</p></div>
+        <div class="col-xs-12 col-sm-6 col-md-4"><p>Box 8</p></div>
+        <div class="col-xs-12 col-sm-6 col-md-4"><p>Box 9</p></div>
+        <div class="col-xs-12 col-sm-6 col-md-4"><p>Box 10</p></div>
+        <div class="col-xs-12 col-sm-6 col-md-4"><p>Box 11</p></div>
+        <div class="col-xs-12 col-sm-6 col-md-4"><p>Box 12</p></div>
+    </div>
+    </div>
+    -->
+
+
+
+
+
+
+
     <footer>
       This project on <a href="https://github.com/hkarn/HTML-CSS-JS-Webstandards-final-YHJUST16">Github</a>
     <footer>
