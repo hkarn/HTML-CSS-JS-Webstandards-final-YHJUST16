@@ -1,6 +1,6 @@
 # Simple vocabulary testing site
 
-## Education assignment at Lernia YH.<br>Final assignment for the first coding course (HTML-CSS-JS-Webstandards) in YHJUST16
+## Education assignment at Lernia YH.<br>Final assignment for the first coding course<br>HTML-CSS-JS-Webstandards in YHJUST16
 
 ### by Håkan Kindström Arnoldson
   * [LinkedIn](https://www.linkedin.com/in/arnoldson)
