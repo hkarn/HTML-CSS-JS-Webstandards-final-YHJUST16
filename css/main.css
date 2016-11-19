@@ -1,0 +1,63 @@
+
+
+/*******************************************************
+INPUT WORDS VIEW
+*******************************************************/
+
+/* Positioning & basic layout
+   ========================================================================== */
+
+
+
+.language-selector {
+  padding:15px 0;
+  margin: auto;
+  display: inline-block;
+}
+
+.language-selector header {
+  text-align: center;
+  font-size: 0.8em;
+  margin: auto;
+}
+
+.language-selector div {
+  text-align: center;
+  margin: auto;
+}
+
+.wordlist-area-input {
+  display: none;
+  width: 210px;
+  height: 400px;
+}
+
+.a-word {
+  display: block;
+  margin:auto;
+}
+
+.wordlist-lines-input button{
+  display: block;
+  margin:auto;
+}
+
+.scrollable-menu {
+    height: auto;
+    max-height: 200px;
+    overflow-x: hidden;
+}
+
+/* Color and style
+   ========================================================================== */
+
+hr {
+  border: 0;
+  height: 1px;
+  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+}
+
+
+/*******************************************************
+QUIZZ VIEW TYPE 1
+*******************************************************/

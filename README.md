@@ -5,6 +5,8 @@
 ### by Håkan Kindström Arnoldson
   * [LinkedIn](https://www.linkedin.com/in/arnoldson)
 
+Live at <https://arnoldson.online/uppgifter/gradingassignment1-YHJUST16/>
+
 ### Technologies
   * Bootstrap for ...
   * jQuery for ..
@@ -16,4 +18,5 @@ I have used a mobile first design, starting with a simple worsing and adding som
 ### Report
 
 
-
+### Notes
+  * The [bootstrap languages plugin](https://github.com/usrz/bootstrap-languages) has been edited to display "Other language" rather then "Unknown language"
