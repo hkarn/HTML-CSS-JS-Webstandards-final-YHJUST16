@@ -17,7 +17,7 @@ I have used a mobile first design, starting with a simple layout and adding some
 
 ### Report
 
-The basic layout and function of the input words stage was done first. There was an issue with adapting the langage selector plugin for bootstrap to work inside a form. A solution was found by sending the value to the bootstrap dropdown item and to hidden form field when a selection is made via javascript.
+The basic layout and function of the input words stage were done first. There was an issue with adapting the langage selector plugin for bootstrap to work inside a form. A solution was found by sending the value to the bootstrap dropdown item and to hidden form field when a selection is made via javascript.
 
 
 ### Notes

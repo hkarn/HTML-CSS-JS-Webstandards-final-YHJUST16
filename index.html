@@ -19,8 +19,9 @@
       <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
       <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
+    <link rel="stylesheet" href="css/font-awesome.min.css">
 
-    <link href="css/main.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
 
   </head>
   <body>
@@ -32,212 +33,223 @@
 
     <script src="js/main.js"></script>
 
+    <!-- START MAIN NAVIGATION -->
+    <nav id="main-navigation" class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+        </div>
+        <div class="collapse navbar-collapse" id="myNavbar">
+          <ul class="nav navbar-nav">
+            <li><a href="#" class="main-nav-link"><i class="fa fa-home fa-2x main-nav-icon" aria-hidden="true"></i><span>Reset</span></a></li>
+            <li><a href="#" class="main-nav-link"><i class="fa fa-upload fa-2x main-nav-icon" aria-hidden="true"></i><span>Export</span></a></li>
+            <li><a href="#" class="main-nav-link"><i class="fa fa-download fa-2x main-nav-icon" aria-hidden="true"></i><span>Import</span></a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a href="https://github.com/hkarn/HTML-CSS-JS-Webstandards-final-YHJUST16" class="main-nav-link"><i class="fa fa-github fa-2x main-nav-icon" aria-hidden="true"></i><span>Github</span></a></li>
+            <li><a href="https://www.linkedin.com/in/arnoldson" class="main-nav-link"><i class="fa fa-linkedin-square fa-2x main-nav-icon" aria-hidden="true"></i><span>LinkedIn</span></a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+    <!-- END MAIN NAVIGATION -->
 
 
+    <!-- START MAIN HEADER -->
+    <header id="main-header">
+      <h1>Vocabulary tester</h1>
+      <h2>Learn foreign words</h2>
+    </header>
+    <!-- END MAIN HEADER -->
 
+
+    <!--START BOOTSTRAP GRID-->
     <div class="container">
       <div class="row">
 
-      <div class="col-xs-12 col-sm-12 text-center">
-      <header>Input type</header>
-      <button onclick="showWordbyword()">Word by word</button><button onclick="showTextarea()">Copy list</button>
-      </div>
-
-      <div class="col-xs-12 visible-xs-block hidden-sm"><hr></div>
-
-      
-      <div class="col-xs-12 col-sm-6 text-center">
-
-      <form>
-      
-      <section class="wordlist-lines-input">
-        <div class="wordlist-lines-thelines">
-        <input type="text" class="a-word">
-        <input type="text" class="a-word">
-        <input type="text" class="a-word">
-        <input type="text" class="a-word">
-        <input type="text" class="a-word">
-        <input type="text" class="a-word">
+      <!-- START INPUT WORDS VIEW -->
+        <div class="col-xs-12 col-sm-12 text-center input-selector">
+          <h3>Input type</h3>
+          <button id="wordbyword-button">Word by word</button>
+          <button id="copylists-button">Copy lists</button>
         </div>
-      
-      <button type="button" onclick="addLine()">Add more words.</button>
 
-      </section>
+        <div class="col-xs-12 visible-xs-block hidden-sm"><hr></div>
+  
+        <div class="col-xs-12 col-sm-6 text-center">
+          <section class="wordlist-lines-input">
+            <ol class="wordlist-lines-thelines">
+              <li><input type="text" class="a-word"></li>
+              <li><input type="text" class="a-word"></li>
+              <li><input type="text" class="a-word"></li>
+              <li><input type="text" class="a-word"></li>
+              <li><input type="text" class="a-word"></li>
+            </ol>
+            <button type="button" class="addline-button">Add more words</button>
+          </section>
 
-      <textarea class="wordlist-area-input">
-        
-      </textarea>
+          <textarea class="wordlist-area-input"></textarea>
 
+          <div class="block-clear"></div>
 
-      <input type="hidden">
-      </form>
-
-
-      <section class="language-selector">
-        <header>Select language for this list</header>
-        <div class="btn-group dropup">
-          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-            <span id="selected_lang-menu-1" class="lang-sm lang-lbl-full" lang=""></span> <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu scrollable-menu" role="menu">
-            <li><span class="lang-sm lang-lbl-full" lang="ar" onclick="selectLang('ar',1)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="be" onclick="selectLang('be',1)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="bg" onclick="selectLang('bg',1)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="cs" onclick="selectLang('cs',1)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="da" onclick="selectLang('da',1)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="de" onclick="selectLang('de',1)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="el" onclick="selectLang('el',1)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="en" onclick="selectLang('en',1)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="es" onclick="selectLang('es',1)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="et" onclick="selectLang('et',1)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="fi" onclick="selectLang('fi',1)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="fr" onclick="selectLang('fr',1)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="ga" onclick="selectLang('ga',1)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="hi" onclick="selectLang('hi',1)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="hr" onclick="selectLang('hr',1)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="hu" onclick="selectLang('hu',1)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="in" onclick="selectLang('in',1)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="is" onclick="selectLang('is',1)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="it" onclick="selectLang('it',1)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="iw" onclick="selectLang('iw',1)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="ja" onclick="selectLang('ja',1)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="ko" onclick="selectLang('ko',1)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="lt" onclick="selectLang('lt',1)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="lv" onclick="selectLang('lv',1)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="mk" onclick="selectLang('mk',1)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="mt" onclick="selectLang('mt',1)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="nl" onclick="selectLang('nl',1)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="no" onclick="selectLang('no',1)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="pl" onclick="selectLang('pl',1)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="pt" onclick="selectLang('pt',1)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="ro" onclick="selectLang('ro',1)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="ru" onclick="selectLang('ru',1)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="sk" onclick="selectLang('sk',1)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="sl" onclick="selectLang('sl',1)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="sq" onclick="selectLang('sq',1)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="sr" onclick="selectLang('sr',1)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="sv" onclick="selectLang('sv',1)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="uk" onclick="selectLang('uk',1)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="vi" onclick="selectLang('vi',1)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="zh" onclick="selectLang('zh',1)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" onclick="selectLang('',1)"></span></li>
-          </ul>
-          </div>
-        </section>
-
+          
+          <section class="language-selector">
+            <header>Select language for this list</header>
+            <div class="btn-group dropup">
+              <input type="hidden" name="first-language">
+              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                <span id="selected_lang-menu" class="lang-sm lang-lbl-full" lang=""></span> <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu scrollable-menu language-list" role="menu">
+                <li lang="ar"><span class="lang-sm lang-lbl-full" lang="ar"></span></li>
+                <li lang="be"><span class="lang-sm lang-lbl-full" lang="be"></span></li>
+                <li lang="bg"><span class="lang-sm lang-lbl-full" lang="bg"></span></li>
+                <li lang="cs"><span class="lang-sm lang-lbl-full" lang="cs"></span></li>
+                <li lang="da"><span class="lang-sm lang-lbl-full" lang="da"></span></li>
+                <li lang="de"><span class="lang-sm lang-lbl-full" lang="de"></span></li>
+                <li lang="el"><span class="lang-sm lang-lbl-full" lang="el"></span></li>
+                <li lang="en"><span class="lang-sm lang-lbl-full" lang="en"></span></li>
+                <li lang="es"><span class="lang-sm lang-lbl-full" lang="es"></span></li>
+                <li lang="et"><span class="lang-sm lang-lbl-full" lang="et"></span></li>
+                <li lang="fi"><span class="lang-sm lang-lbl-full" lang="fi"></span></li>
+                <li lang="fr"><span class="lang-sm lang-lbl-full" lang="fr"></span></li>
+                <li lang="ga"><span class="lang-sm lang-lbl-full" lang="ga"></span></li>
+                <li lang="hi"><span class="lang-sm lang-lbl-full" lang="hi"></span></li>
+                <li lang="hr"><span class="lang-sm lang-lbl-full" lang="hr"></span></li>
+                <li lang="hu"><span class="lang-sm lang-lbl-full" lang="hu"></span></li>
+                <li lang="in"><span class="lang-sm lang-lbl-full" lang="in"></span></li>
+                <li lang="is"><span class="lang-sm lang-lbl-full" lang="is"></span></li>
+                <li lang="it"><span class="lang-sm lang-lbl-full" lang="it"></span></li>
+                <li lang="iw"><span class="lang-sm lang-lbl-full" lang="iw"></span></li>
+                <li lang="ja"><span class="lang-sm lang-lbl-full" lang="ja"></span></li>
+                <li lang="ko"><span class="lang-sm lang-lbl-full" lang="ko"></span></li>
+                <li lang="lt"><span class="lang-sm lang-lbl-full" lang="lt"></span></li>
+                <li lang="lv"><span class="lang-sm lang-lbl-full" lang="lv"></span></li>
+                <li lang="mk"><span class="lang-sm lang-lbl-full" lang="mk"></span></li>
+                <li lang="mt"><span class="lang-sm lang-lbl-full" lang="mt"></span></li>
+                <li lang="nl"><span class="lang-sm lang-lbl-full" lang="nl"></span></li>
+                <li lang="no"><span class="lang-sm lang-lbl-full" lang="no"></span></li>
+                <li lang="pl"><span class="lang-sm lang-lbl-full" lang="pl"></span></li>
+                <li lang="pt"><span class="lang-sm lang-lbl-full" lang="pt"></span></li>
+                <li lang="ro"><span class="lang-sm lang-lbl-full" lang="ro"></span></li>
+                <li lang="ru"><span class="lang-sm lang-lbl-full" lang="ru"></span></li>
+                <li lang="sk"><span class="lang-sm lang-lbl-full" lang="sk"></span></li>
+                <li lang="sl"><span class="lang-sm lang-lbl-full" lang="sl"></span></li>
+                <li lang="sq"><span class="lang-sm lang-lbl-full" lang="sq"></span></li>
+                <li lang="sr"><span class="lang-sm lang-lbl-full" lang="sr"></span></li>
+                <li lang="sv"><span class="lang-sm lang-lbl-full" lang="sv"></span></li>
+                <li lang="uk"><span class="lang-sm lang-lbl-full" lang="uk"></span></li>
+                <li lang="vi"><span class="lang-sm lang-lbl-full" lang="vi"></span></li>
+                <li lang="zh"><span class="lang-sm lang-lbl-full" lang="zh"></span></li>
+                <li lang=""><span class="lang-sm lang-lbl-full" lang=""></span></li>
+              </ul>
+            </div>
+          </section>
         </div>
 
       <div class="col-xs-12 visible-xs-block hidden-sm"><hr></div>
+        <div class="col-xs-12 col-sm-6 text-center">
+          <section class="wordlist-lines-input">
+            <ol class="wordlist-lines-thelines">
+              <li><input type="text" class="a-word"></li>
+              <li><input type="text" class="a-word"></li>
+              <li><input type="text" class="a-word"></li>
+              <li><input type="text" class="a-word"></li>
+              <li><input type="text" class="a-word"></li>
+            </ol>
+            <button type="button" class="addline-button">Add more words</button>
+          </section>
 
-      <div class="col-xs-12 col-sm-6 text-center">
-      
-      <form>
-      
-      <section class="wordlist-lines-input">
-        <div class="wordlist-lines-thelines">
-        <input type="text" class="a-word">
-        <input type="text" class="a-word">
-        <input type="text" class="a-word">
-        <input type="text" class="a-word">
-        <input type="text" class="a-word">
-        <input type="text" class="a-word">
+          <textarea class="wordlist-area-input"></textarea>
+
+          <div class="block-clear"></div>
+
+
+          <section class="language-selector">
+            <header>Select language for this list</header>
+            <div class="btn-group dropup">
+              <input type="hidden" name="second-language">
+              <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
+                <span id="selected_lang-menu" class="lang-sm lang-lbl-full" lang=""></span> <span class="caret"></span>
+              </button>
+              <ul class="dropdown-menu scrollable-menu language-list" role="menu">
+                <li lang="ar"><span class="lang-sm lang-lbl-full" lang="ar"></span></li>
+                <li lang="be"><span class="lang-sm lang-lbl-full" lang="be"></span></li>
+                <li lang="bg"><span class="lang-sm lang-lbl-full" lang="bg"></span></li>
+                <li lang="cs"><span class="lang-sm lang-lbl-full" lang="cs"></span></li>
+                <li lang="da"><span class="lang-sm lang-lbl-full" lang="da"></span></li>
+                <li lang="de"><span class="lang-sm lang-lbl-full" lang="de"></span></li>
+                <li lang="el"><span class="lang-sm lang-lbl-full" lang="el"></span></li>
+                <li lang="en"><span class="lang-sm lang-lbl-full" lang="en"></span></li>
+                <li lang="es"><span class="lang-sm lang-lbl-full" lang="es"></span></li>
+                <li lang="et"><span class="lang-sm lang-lbl-full" lang="et"></span></li>
+                <li lang="fi"><span class="lang-sm lang-lbl-full" lang="fi"></span></li>
+                <li lang="fr"><span class="lang-sm lang-lbl-full" lang="fr"></span></li>
+                <li lang="ga"><span class="lang-sm lang-lbl-full" lang="ga"></span></li>
+                <li lang="hi"><span class="lang-sm lang-lbl-full" lang="hi"></span></li>
+                <li lang="hr"><span class="lang-sm lang-lbl-full" lang="hr"></span></li>
+                <li lang="hu"><span class="lang-sm lang-lbl-full" lang="hu"></span></li>
+                <li lang="in"><span class="lang-sm lang-lbl-full" lang="in"></span></li>
+                <li lang="is"><span class="lang-sm lang-lbl-full" lang="is"></span></li>
+                <li lang="it"><span class="lang-sm lang-lbl-full" lang="it"></span></li>
+                <li lang="iw"><span class="lang-sm lang-lbl-full" lang="iw"></span></li>
+                <li lang="ja"><span class="lang-sm lang-lbl-full" lang="ja"></span></li>
+                <li lang="ko"><span class="lang-sm lang-lbl-full" lang="ko"></span></li>
+                <li lang="lt"><span class="lang-sm lang-lbl-full" lang="lt"></span></li>
+                <li lang="lv"><span class="lang-sm lang-lbl-full" lang="lv"></span></li>
+                <li lang="mk"><span class="lang-sm lang-lbl-full" lang="mk"></span></li>
+                <li lang="mt"><span class="lang-sm lang-lbl-full" lang="mt"></span></li>
+                <li lang="nl"><span class="lang-sm lang-lbl-full" lang="nl"></span></li>
+                <li lang="no"><span class="lang-sm lang-lbl-full" lang="no"></span></li>
+                <li lang="pl"><span class="lang-sm lang-lbl-full" lang="pl"></span></li>
+                <li lang="pt"><span class="lang-sm lang-lbl-full" lang="pt"></span></li>
+                <li lang="ro"><span class="lang-sm lang-lbl-full" lang="ro"></span></li>
+                <li lang="ru"><span class="lang-sm lang-lbl-full" lang="ru"></span></li>
+                <li lang="sk"><span class="lang-sm lang-lbl-full" lang="sk"></span></li>
+                <li lang="sl"><span class="lang-sm lang-lbl-full" lang="sl"></span></li>
+                <li lang="sq"><span class="lang-sm lang-lbl-full" lang="sq"></span></li>
+                <li lang="sr"><span class="lang-sm lang-lbl-full" lang="sr"></span></li>
+                <li lang="sv"><span class="lang-sm lang-lbl-full" lang="sv"></span></li>
+                <li lang="uk"><span class="lang-sm lang-lbl-full" lang="uk"></span></li>
+                <li lang="vi"><span class="lang-sm lang-lbl-full" lang="vi"></span></li>
+                <li lang="zh"><span class="lang-sm lang-lbl-full" lang="zh"></span></li>
+                <li lang=""><span class="lang-sm lang-lbl-full" lang=""></span></li>
+              </ul>
+            </div>
+          </section>
         </div>
-      
-      <button type="button" onclick="addLine()">Add more words.</button>
-
-      </section>
-
-      <textarea class="wordlist-area-input">
-        
-      </textarea>
+        <!-- END INPUT WORDS VIEW -->
 
 
-      <input type="hidden">
-      </form>
-      <section class="language-selector">
-        <header>Select language for this list</header>
-        <div class="btn-group dropup">
-          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown">
-            <span id="selected_lang-menu-2" class="lang-sm lang-lbl-full" lang=""></span> <span class="caret"></span>
-          </button>
-          <ul class="dropdown-menu scrollable-menu" role="menu">
-            <li><span class="lang-sm lang-lbl-full" lang="ar" onclick="selectLang('ar',2)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="be" onclick="selectLang('be',2)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="bg" onclick="selectLang('bg',2)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="cs" onclick="selectLang('cs',2)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="da" onclick="selectLang('da',2)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="de" onclick="selectLang('de',2)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="el" onclick="selectLang('el',2)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="en" onclick="selectLang('en',2)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="es" onclick="selectLang('es',2)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="et" onclick="selectLang('et',2)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="fi" onclick="selectLang('fi',2)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="fr" onclick="selectLang('fr',2)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="ga" onclick="selectLang('ga',2)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="hi" onclick="selectLang('hi',2)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="hr" onclick="selectLang('hr',2)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="hu" onclick="selectLang('hu',2)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="in" onclick="selectLang('in',2)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="is" onclick="selectLang('is',2)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="it" onclick="selectLang('it',2)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="iw" onclick="selectLang('iw',2)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="ja" onclick="selectLang('ja',2)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="ko" onclick="selectLang('ko',2)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="lt" onclick="selectLang('lt',2)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="lv" onclick="selectLang('lv',2)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="mk" onclick="selectLang('mk',2)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="mt" onclick="selectLang('mt',2)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="nl" onclick="selectLang('nl',2)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="no" onclick="selectLang('no',2)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="pl" onclick="selectLang('pl',2)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="pt" onclick="selectLang('pt',2)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="ro" onclick="selectLang('ro',2)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="ru" onclick="selectLang('ru',2)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="sk" onclick="selectLang('sk',2)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="sl" onclick="selectLang('sl',2)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="sq" onclick="selectLang('sq',2)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="sr" onclick="selectLang('sr',2)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="sv" onclick="selectLang('sv',2)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="uk" onclick="selectLang('uk',2)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="vi" onclick="selectLang('vi',2)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" lang="zh" onclick="selectLang('zh',2)"></span></li>
-            <li><span class="lang-sm lang-lbl-full" onclick="selectLang('',2)"></span></li>
-          </ul>
-          </div>
-        </section>
+        <!-- START IMPORT/EXPORT VIEW -->
 
-        </div>
+        <!-- END IMPORT/EXPORT VIEW -->
+
+
+        <!-- START QUIZ VIEW -->
+
+        <!-- END QUIZVIEW -->
+
 
 
         </div>
       </div>
-    <!--
-    <div class="container">
-    <div class="row">
-        <div class="col-xs-12 col-sm-6 col-md-4"><p>Box 1</p></div>
-        <div class="col-xs-12 col-sm-6 col-md-4"><p>Box 2</p></div>
-        <div class="col-xs-12 col-sm-6 col-md-4"><p>Box 3</p></div>
-        <div class="col-xs-12 col-sm-6 col-md-4"><p>Box 4</p></div>
-        <div class="col-xs-12 col-sm-6 col-md-4"><p>Box 5</p></div>
-        <div class="col-xs-12 col-sm-6 col-md-4"><p>Box 6</p></div>
-        <div class="col-xs-12 col-sm-6 col-md-4"><p>Box 7</p></div>
-        <div class="col-xs-12 col-sm-6 col-md-4"><p>Box 8</p></div>
-        <div class="col-xs-12 col-sm-6 col-md-4"><p>Box 9</p></div>
-        <div class="col-xs-12 col-sm-6 col-md-4"><p>Box 10</p></div>
-        <div class="col-xs-12 col-sm-6 col-md-4"><p>Box 11</p></div>
-        <div class="col-xs-12 col-sm-6 col-md-4"><p>Box 12</p></div>
-    </div>
-    </div>
-    -->
+      <!--END BOOTSTRAP GRID-->
 
 
 
 
 
 
-
+    <!-- START MAIN FOOTER -->
+    <footer id="main-footer">
+      <p>by Håkan K Arnoldson.</p>
+      <p>Assignmnet for course at Lernia. YHJUST16.</p>
     <footer>
-      This project on <a href="https://github.com/hkarn/HTML-CSS-JS-Webstandards-final-YHJUST16">Github</a>
-    <footer>
+    <!-- END MAIN FOOTER -->
   </body>
 </html>
