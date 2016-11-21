@@ -1,13 +1,53 @@
+/*******************************************************
+GLOBALS
+*******************************************************/
 
+.block-clear {
+  display: block;
+  padding:0;
+  margin:auto;
+}
 
 /*******************************************************
 INPUT WORDS VIEW
 *******************************************************/
 
+
+
 /* Positioning & basic layout
    ========================================================================== */
 
+/* Header & top nav*/
 
+#main-navigation div {
+  padding:0 15px 0 5px;
+}
+
+#main-header {
+  text-align: center;
+  padding: 15px;
+}
+
+.main-nav-icon {
+  float: left;
+}
+
+.main-nav-link {
+  vertical-align: middle;
+}
+
+.main-nav-link span {
+  line-height: 30px;
+  padding-left: 5px;
+}
+
+
+
+/* Contents */
+
+.input-selector {
+  padding-bottom: 25px;
+}
 
 .language-selector {
   padding:15px 0;
@@ -30,16 +70,29 @@ INPUT WORDS VIEW
   display: none;
   width: 210px;
   height: 400px;
+  resize: none;
+  outline: none;
 }
 
 .a-word {
-  display: block;
-  margin:auto;
+  display: inline-block;
+  width: 220px;
 }
 
-.wordlist-lines-input button{
-  display: block;
-  margin:auto;
+.wordlist-lines-input {
+  width: 240px;
+  display: inline-block;
+}
+
+.wordlist-lines-thelines {
+  padding: 0;
+  margin: 0;
+  list-style-position: outside;
+}
+
+.wordlist-lines-thelines li {
+  padding: 1px;
+  margin: auto;
 }
 
 .scrollable-menu {
@@ -48,8 +101,22 @@ INPUT WORDS VIEW
     overflow-x: hidden;
 }
 
+
+/* Footer */
+
+
+
 /* Color and style
    ========================================================================== */
+
+
+/* Header & top nav */
+
+#main-navigation {
+  background-color: grey;
+}
+
+/* Contents */
 
 hr {
   border: 0;
@@ -57,6 +124,69 @@ hr {
   background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
 }
 
+.a-word {
+  border: 1px solid black;
+  border-radius: 5px;
+  padding:3px;
+}
+
+.wordlist-area-input {
+  border: 1px solid black;
+  border-radius: 5px;
+  padding:3px;
+}
+
+.addline-button {
+  background-color: white;
+  border: 1px solid black;
+  color: black;
+  padding:3px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 5px;
+  width: 220px;
+  margin-top:1px;
+}
+
+#wordbyword-button {
+  background-color: black;
+  border: none;
+  color: white;
+  padding: 8px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 0.95em;
+  border-radius: 5px;
+  width: 130px;
+}
+
+#copylists-button {
+  background-color: grey;
+  border: none;
+  color: white;
+  padding: 8px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 0.95em;
+  border-radius: 5px;
+  width: 130px;
+}
+
+/* Footer */
+
+#main-footer {
+  padding-top: 50px;
+  text-align: center;
+  margin:auto;
+  font-size: 0.7em;
+  font-color: grey;
+}
+
+/*******************************************************
+IMPORT/EXPORT VIEW
+*******************************************************/
 
 /*******************************************************
 QUIZZ VIEW TYPE 1
