@@ -32,6 +32,12 @@ INPUT WORDS VIEW
   float: left;
 }
 
+@media only screen and (max-width: 767px) {
+  .main-nav-link {
+  margin-left: 20px;
+  }
+}
+
 .main-nav-link {
   vertical-align: middle;
 }
@@ -112,8 +118,41 @@ INPUT WORDS VIEW
 
 /* Header & top nav */
 
+#main-header {
+  display: block;
+  position: relative;
+  margin:auto;
+  height:200px;
+}
+
+#main-header:before {
+  content: "";
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  position: absolute;
+  z-index: -1;   
+  background: url("../img/map-of-the-world-862719_640.jpg") no-repeat center;
+  background-size: auto 200px;
+  opacity: 0.1;
+
+}
+
 #main-navigation {
-  background-color: grey;
+  background-color: royalblue;
+}
+
+#myNavbar ul li a {
+  color: lightgrey;
+}
+
+#myNavbar ul li a:hover {
+  color: white;
+}
+
+#myNavbar ul li a:focus {
+  color: white;
 }
 
 /* Contents */
@@ -125,20 +164,20 @@ hr {
 }
 
 .a-word {
-  border: 1px solid black;
+  border: 1px solid royalblue;
   border-radius: 5px;
   padding:3px;
 }
 
 .wordlist-area-input {
-  border: 1px solid black;
+  border: 1px solid royalblue;
   border-radius: 5px;
   padding:3px;
 }
 
 .addline-button {
   background-color: white;
-  border: 1px solid black;
+  border: 1px solid royalblue;
   color: black;
   padding:3px;
   text-align: center;
@@ -149,7 +188,7 @@ hr {
 }
 
 #wordbyword-button {
-  background-color: black;
+  background-color: royalblue;
   border: none;
   color: white;
   padding: 8px;
@@ -162,7 +201,7 @@ hr {
 }
 
 #copylists-button {
-  background-color: grey;
+  background-color: dodgerblue;
   border: none;
   color: white;
   padding: 8px;
@@ -172,6 +211,20 @@ hr {
   font-size: 0.95em;
   border-radius: 5px;
   width: 130px;
+}
+
+#start-quiz-button {
+  background-color: green;
+  border: none;
+  color: white;
+  padding: 10px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 2em;
+  border-radius: 5px;
+  width: 250px;
+  margin-top: 50px;
 }
 
 /* Footer */
@@ -191,3 +244,7 @@ IMPORT/EXPORT VIEW
 /*******************************************************
 QUIZZ VIEW TYPE 1
 *******************************************************/
+
+#quiz1-view-container{
+  display: none;
+}
