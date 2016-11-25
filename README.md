@@ -16,11 +16,13 @@ Live at <https://arnoldson.online/uppgifter/gradingassignment1-YHJUST16/>
 
 
 ### Method
-I have used a mobile first design, starting with a simple layout and adding some possible complexity later. Though emphasis has been on the scripting inputs and the quizzes more then the design. The project will use a single responsive, interactive page.
+I have used a mobile first design, starting with a simple layout and adding some possible complexity later. I ended up adding the decorative flags, the advertising space and made a more compact display for wide monitors by adding extra empty bootstrap grid boxes on the sides. Though emphasis has been on the scripting inputs and the quizzes more then the design. The project will use a single responsive, interactive page.
 
 ### Report
 
-The basic layout and function of the input words stage were done first. There was an issue with adapting the langage selector plugin for bootstrap to work inside a form. A solution was found by sending the value to the bootstrap dropdown item and to hidden form field when a selection is made via javascript.
+The basic layout and function of the input words stage were done first. There was an issue with adapting the language selector plugin for bootstrap to work inside a form. A solution was found by sending the value to the bootstrap drop-down item and to hidden form field when a selection is made via javascript.
+
+I have prepared for adding more ways of doing the quiz later by using a switch in the function. The quizzes have recurisvity calling themselves from a listener sub-function in the quiz function and keep going until the desired state of the array theWords (counting right and wrong answers in each word object) is reached.
 
 
 ### Notes
