@@ -204,7 +204,7 @@ function showTextarea() {
     b[i].style.display="none";
   };
   document.getElementById("wordbyword-button").style.backgroundColor="white";
-  document.getElementById("copylists-button").style.backgroundColor="royalblue";
+  document.getElementById("copylists-button").style.backgroundColor="rgb(2, 117, 216)";
   document.getElementById("wordbyword-button").style.color="black";
   document.getElementById("copylists-button").style.color="white";
 };
@@ -217,7 +217,7 @@ function showWordbyword() {
     a[i].style.display="none";
     b[i].style.display="inline-block";
   };
-  document.getElementById("wordbyword-button").style.backgroundColor="royalblue";
+  document.getElementById("wordbyword-button").style.backgroundColor="rgb(2, 117, 216)";
   document.getElementById("copylists-button").style.backgroundColor="white";
   document.getElementById("wordbyword-button").style.color="white";
   document.getElementById("copylists-button").style.color="black";
