@@ -8,6 +8,43 @@ GLOBALS
   margin:auto;
 }
 
+body {
+  padding: 10px;
+  max-width: 1300px;
+  margin: auto;
+}
+
+a {
+  color: black;
+  text-decoration: none;
+}
+
+a:visited {
+  color: black;
+  text-decoration: none;
+}
+
+a:hover {
+  color: royalblue;;
+  text-decoration: underline;
+}
+
+a:focus {
+  color: royalblue;
+  text-decoration: underline;
+}
+
+img {
+  max-width: 100%;
+  max-height: 100%;
+  width: auto;
+  height: auto;
+}
+
+figcaption {
+  max-width: 100%;
+}
+
 /*******************************************************
 INPUT WORDS VIEW
 *******************************************************/
@@ -17,7 +54,36 @@ INPUT WORDS VIEW
 /* Positioning & basic layout
    ========================================================================== */
 
+
+/* advertisment */
+
+#right-advertisment {
+  position: absolute;
+  color: white;
+  right: 0;
+  top: 45%;
+  height: 35%;
+  text-align: center;
+  float: right;
+}
+
+@media only screen and (max-width: 1170px) {
+  #right-advertisment {
+  color: black;
+  }
+}
+
+#right-advertisment img{
+  float: right;
+}
+
+
 /* Header & top nav*/
+
+#main-navigation {
+  border-radius: 10px;
+  border: none;
+}
 
 #main-navigation div {
   padding:0 15px 0 5px;
@@ -25,7 +91,7 @@ INPUT WORDS VIEW
 
 #main-header {
   text-align: center;
-  padding: 15px;
+  padding: 0 15px 15px 15px;
 }
 
 .main-nav-icon {
@@ -110,7 +176,10 @@ INPUT WORDS VIEW
 
 /* Footer */
 
-
+#main-footer {
+  max-width: 500px;
+  margin:auto;
+}
 
 /* Color and style
    ========================================================================== */
@@ -121,13 +190,19 @@ INPUT WORDS VIEW
 #main-header {
   display: block;
   position: relative;
-  margin:auto;
+  margin: auto;
+  height:225px;
+}
+
+@media only screen and (max-width: 767px) {
+  #main-header {
   height:200px;
+  }
 }
 
 #main-header:before {
   content: "";
-  top: 0;
+  top: 25px;
   left: 0;
   bottom: 0;
   right: 0;
@@ -136,7 +211,12 @@ INPUT WORDS VIEW
   background: url("../img/map-of-the-world-862719_640-pixabayCC0.jpg") no-repeat center;
   background-size: auto 200px;
   opacity: 0.1;
+}
 
+@media only screen and (max-width: 767px) {
+  #main-header:before {
+  top: 0;
+  }
 }
 
 #main-navigation {
@@ -153,6 +233,34 @@ INPUT WORDS VIEW
 
 #myNavbar ul li a:focus {
   color: white;
+}
+
+
+#main-header-flags {
+  overflow: hidden;
+  position: relative;
+  margin: auto;
+}
+
+#main-header-flags .overflow-center {
+  white-space: nowrap;
+  margin-left: -100%;
+  margin-right: -100%;
+}
+
+#main-header-flags span {
+  border-radius: 5px;
+  transition: all .3s;
+}
+
+#main-header-flags span:hover {
+  border-radius: 100%;
+}
+
+@media only screen and (max-width: 767px) {
+  #main-header-flags {
+  display: none;
+  }
 }
 
 /* Contents */
@@ -189,7 +297,7 @@ hr {
 
 #wordbyword-button {
   background-color: royalblue;
-  border: none;
+  border: 1px solid royalblue;
   color: white;
   padding: 8px;
   text-align: center;
@@ -197,25 +305,28 @@ hr {
   display: inline-block;
   font-size: 0.95em;
   border-radius: 5px;
-  width: 130px;
+  width: 230px;
+  transition: all .3s;
 }
 
 #copylists-button {
-  background-color: dodgerblue;
-  border: none;
-  color: white;
+  background-color: white;
+  border: 1px solid royalblue;
+  color: black;
   padding: 8px;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 0.95em;
   border-radius: 5px;
-  width: 130px;
+  width: 230px;
+  margin-top: 10px;
+  transition: all .3s;
 }
 
 #start-quiz-button {
   background-color: green;
-  border: none;
+  border: 1px solid green;
   color: white;
   padding: 10px;
   text-align: center;
@@ -225,15 +336,33 @@ hr {
   border-radius: 5px;
   width: 250px;
   margin-top: 50px;
+  transition: all .3s;
 }
+
+.language-selector div button {
+  background-color: white;
+  border: 1px solid royalblue;
+  color: black;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 5px;
+  min-width: 220px;
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+}
+
+/* couldnt find another way to overwrite the buttongroup less css. copied element from console and made differnt rules */
+.btn-group>.btn:last-child:not(:first-child), .btn-group>.dropdown-toggle:not(:first-child) {
+  border-top-left-radius: 5px;
+  border-bottom-left-radius: 5px;
+  }
 
 /* Footer */
 
 #main-footer {
   padding-top: 50px;
   text-align: center;
-  margin:auto;
-  font-size: 0.7em;
+  font-size: 0.72em;
   font-color: grey;
 }
 
@@ -245,6 +374,6 @@ IMPORT/EXPORT VIEW
 QUIZZ VIEW TYPE 1
 *******************************************************/
 
-#quiz1-view-container{
+#quiz-view-container{
   display: none;
 }

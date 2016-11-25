@@ -8,7 +8,7 @@
     <meta name="author" content="Håkan K Arnoldson">
     <!-- https://github.com/hkarn/HTML-CSS-JS-Webstandards-final-YHJUST16 -->
 
-    <title>Vocabulary test</title>
+    <title>Vocabulary tester</title>
 
     <!-- Bootstrap -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -32,6 +32,17 @@
     <script src="js/bootstrap.min.js"></script>
 
     <script src="js/main.js"></script>
+
+    <!-- ADVERTISMENT BANNER -->
+    <figure id="right-advertisment">
+      <a href="http://pixalry.io/search/nuka+cola" target="_blank">
+        <img src="http://65.media.tumblr.com/ad031f3c1f2f0593b2ef7cbea06d5f17/tumblr_mybr8bDWlq1t7b5qro1_1280.jpg" alt="Advertisment">
+      </a>
+    </figure>
+   
+
+    <!-- END ADVERTISMENT BANNER -->
+
 
     <!-- START MAIN NAVIGATION -->
     <nav id="main-navigation" class="navbar navbar-inverse">
@@ -61,8 +72,53 @@
 
     <!-- START MAIN HEADER -->
     <header id="main-header">
+      <section id="main-header-flags">
+        <div class="overflow-center">
+          <span class="lang-sm" lang="ar"></span>
+          <span class="lang-sm" lang="be"></span>
+          <span class="lang-sm" lang="bg"></span>
+          <span class="lang-sm" lang="cs"></span>
+          <span class="lang-sm" lang="da"></span>
+          <span class="lang-sm" lang="de"></span>
+          <span class="lang-sm" lang="el"></span>
+          <span class="lang-sm" lang="en"></span>
+          <span class="lang-sm" lang="es"></span>
+          <span class="lang-sm" lang="et"></span>
+          <span class="lang-sm" lang="fi"></span>
+          <span class="lang-sm" lang="fr"></span>
+          <span class="lang-sm" lang="ga"></span>
+          <span class="lang-sm" lang="hi"></span>
+          <span class="lang-sm" lang="hr"></span>
+          <span class="lang-sm" lang="hu"></span>
+          <span class="lang-sm" lang="in"></span>
+          <span class="lang-sm" lang="is"></span>
+          <span class="lang-sm" lang="it"></span>
+          <span class="lang-sm" lang="iw"></span>
+          <span class="lang-sm" lang="ja"></span>
+          <span class="lang-sm" lang="ko"></span>
+          <span class="lang-sm" lang="lt"></span>
+          <span class="lang-sm" lang="lv"></span>
+          <span class="lang-sm" lang="mk"></span>
+          <span class="lang-sm" lang="mt"></span>
+          <span class="lang-sm" lang="nl"></span>
+          <span class="lang-sm" lang="no"></span>
+          <span class="lang-sm" lang="pl"></span>
+          <span class="lang-sm" lang="pt"></span>
+          <span class="lang-sm" lang="ro"></span>
+          <span class="lang-sm" lang="ru"></span>
+          <span class="lang-sm" lang="sk"></span>
+          <span class="lang-sm" lang="sl"></span>
+          <span class="lang-sm" lang="sq"></span>
+          <span class="lang-sm" lang="sr"></span>
+          <span class="lang-sm" lang="sv"></span>
+          <span class="lang-sm" lang="uk"></span>
+          <span class="lang-sm" lang="vi"></span>
+          <span class="lang-sm" lang="zh"></span>
+          <span class="lang-sm" lang=""></span>
+        </div>
+      </section>
       <h1>Vocabulary tester</h1>
-      <h2>Learn foreign words</h2>
+      <h2>Test yourself on your foreign words from class</h2>
     </header>
     <!-- END MAIN HEADER -->
 
@@ -71,14 +127,17 @@
     <div class="container" id="start-view-container">
       <div class="row">
         <div class="col-xs-12 col-sm-12 text-center input-selector">
-          <h3>Input type</h3>
-          <button id="wordbyword-button">Word by word</button>
-          <button id="copylists-button">Copy lists</button>
+          <button id="wordbyword-button">Input word by word</button>
+          <div class="block-clear"></div>
+          <button id="copylists-button">Input lists of words</button>
         </div>
 
         <div class="col-xs-12 visible-xs-block hidden-sm"><hr></div>
-  
-        <div class="col-xs-12 col-sm-6 text-center">
+        <div class="col-lg-3 hidden-md"></div>
+        <div class="col-xs-12 col-sm-6 col-lg-3 text-center">
+          <header>
+          Enter words in native language
+          </header>
           <section class="wordlist-lines-input">
             <ol class="wordlist-lines-thelines">
               <li><input type="text" class="a-word"></li>
@@ -150,7 +209,10 @@
         </div>
 
       <div class="col-xs-12 visible-xs-block hidden-sm"><hr></div>
-        <div class="col-xs-12 col-sm-6 text-center">
+        <div class="col-xs-12 col-sm-6 col-lg-3 text-center">
+          <header>
+          Enter words in foreign language
+          </header>
           <section class="wordlist-lines-input">
             <ol class="wordlist-lines-thelines">
               <li><input type="text" class="a-word"></li>
@@ -218,8 +280,10 @@
                 <li lang=""><span class="lang-sm lang-lbl-full" lang=""></span></li>
               </ul>
             </div>
+
           </section> 
         </div>
+        <div class="col-lg-3 hidden-md"></div>
         <div class="col-xs-12 col-sm-12 text-center">
           <button id="start-quiz-button">Start quiz!</button>
         </div>
@@ -234,9 +298,10 @@
 
 
     <!-- START QUIZ VIEW -->
-    <div class="container" id="quiz1-view-container">
+    <div class="container" id="quiz-view-container">
       <div class="row">
-      hej!
+        <div class="col-xs-12 col-sm-12 text-center" id="quiz-question"></div>
+        <div class="col-xs-12 col-sm-12 text-center" id="quiz-answer"></div>
       </div>
     </div>
     <!-- END QUIZVIEW -->
@@ -254,7 +319,10 @@
     <!-- START MAIN FOOTER -->
     <footer id="main-footer">
       <p>by Håkan K Arnoldson.</p>
-      <p>Assignmnet for course at Lernia. YHJUST16.</p>
+      <p>Assignmnet for HTML, CSS, JS and Webstandards course at Lernia. YHJUST16.</p>
+      <p>
+        This page is using <a href="https://github.com/twbs/bootstrap" target="blank">Bootstrap 3.3.7</a>, <a href="https://github.com/jquery/jqueryj" target="blank">jQuery 3.1.1</a>, <a href="https://github.com/FortAwesome/Font-Awesome" target="blank">Font Awesome 4.7.0</a> &amp; <a href="https://github.com/usrz/bootstrap-languages" target="blank">Languages for Bootstrap 3</a>. Resources from <a href="https://pixabay.com/" target="_blank">Pixabay</a> are also used and the live version is hosted by <a href="https://www.1984hosting.com/" target="_blank">1984 Hosting</a>
+      </p>
     <footer>
     <!-- END MAIN FOOTER -->
     
