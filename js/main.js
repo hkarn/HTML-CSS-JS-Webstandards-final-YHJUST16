@@ -32,20 +32,49 @@ window.onload = function() {
     };
   $(window).resize(checkSize);
 
+
+  // IMPORT
   $("#menu-import").on("click", function(e) {
     e.preventDefault();
     e.stopPropagation();
-    $("#import-export-container").show();
+
+    if ( $("#import-export-container").css("display") == "none" ) {
+
+      $("#import-export-container").show();
+      var button = $("<button></button>").text("IMPORT");
+      $(button).attr("id","import-export-button");
+      $(button).appendTo("#import-export-container");
+
+      $( "#import-export-button" ).click(function() {
+        //import
+        importCSV($("textarea#import-export-text").val());
+      });
+
+      var button = $("<button></button>").text("CLOSE");
+      $(button).attr("id","import-export-close-button");
+      $(button).appendTo("#import-export-container");
+
+      $( "#import-export-close-button" ).click(function() {
+        //clean export and hide box.
+        $("#import-export-container").find('a').remove();
+        $("#import-export-button").remove();
+        $("#import-export-close-button").remove();
+        $("#import-export-container").hide();
+      });
+
+    }
     
 
 
   });
 
+
+  // EXPORT
   $("#menu-export").on("click", function(e) {
     e.preventDefault();
     e.stopPropagation();
 
-    if ( $("#import-export-button").length < 1 ) { //only executes if export button is not created. to prevent creating multiple buttons
+    if ( $("#import-export-container").css("display") == "none" ) { //only executes if import/export window is closed
 
       $("#import-export-container").show();
       var csvexport = getCSVexport();
@@ -71,7 +100,7 @@ window.onload = function() {
 
       $( "#import-export-close-button" ).click(function() {
         //clean export and hide box.
-        $("#import-export-container").remove("<a>");
+        $("#import-export-container").find('a').remove();
         $("#import-export-button").remove();
         $("#import-export-close-button").remove();
         $("#import-export-container").hide();
@@ -81,9 +110,12 @@ window.onload = function() {
 
   });
 
+  //LEAVE LISTENER
   $(window).on('beforeunload', function() {
     return "Do you really want to leave now?";
   });
+
+
 
   /* Language list listener */
 
@@ -206,6 +238,42 @@ function getCSVexport() {
   };
   return(string);
 };
+
+function importCSV(csv) {
+
+  document.getElementById("copylists-button").click();
+
+  var tmp1 = csv.split("\n");
+  var list1 = "";
+  var list2 = "";
+
+  //sets languages from first row
+
+  if (tmp1.length > 0) {
+
+    var tmp2 = tmp1[0].split(",");
+
+    if (tmp2.length > 0) {
+      var e = document.getElementsByClassName("selected_lang-menu");
+      e[0].lang = tmp2[0];
+      e[1].lang = tmp2[1];
+      document.getElementsByName("first-language")[0].value = tmp2[0];
+      document.getElementsByName("second-language")[0].value = tmp2[1];;
+    }
+
+    for (var i = 1; i < tmp1.length; i++) {
+      var tmp2 = tmp1[i].split(",");
+      if (tmp2.length > 1) {
+      list1 = list1 + tmp2[0] + "\n";
+      list2 = list2 + tmp2[1] + "\n";
+      }
+    }
+
+    var e = document.getElementsByClassName("wordlist-area-input");
+    e[0].value = list1;
+    e[1].value = list2;
+  }
+}
 
 /*******************************************************
 QUIZZ FUNCTIONS
