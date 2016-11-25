@@ -68,7 +68,7 @@ INPUT WORDS VIEW
   display: none;
 }
 
-@media only screen and (max-width: 1170px) {
+@media only screen and (max-width: 1199px) {
   #right-advertisment {
   color: black;
   }
