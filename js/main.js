@@ -7,7 +7,7 @@ https://github.com/hkarn/HTML-CSS-JS-Webstandards-final-YHJUST16
 
 function checkSize(){
 
-  /*checks for a change from the css media query for the advertisment.
+  /*checks for a change from the css media query for the advertisement.
   handled by jQuery booth due to assignment specification demands and problems with 
   fadeout on display: none using keyframes */
 
@@ -27,14 +27,63 @@ INITATIE LISTENERS
 window.onload = function() {
   
   //jQuery on load
-  if ($('#right-advertisment').css('color') == 'rgb(0, 0, 0)' ){
-    $('#right-advertisment').fadeOut(1);
-    };
   if ($('#right-advertisment').css('color') == 'rgb(255, 255, 255)' ){
-    $('#right-advertisment').fadeIn(5000);
+    $('#right-advertisment').fadeIn(6000);
     };
   $(window).resize(checkSize);
 
+  $("#menu-import").on("click", function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+    $("#import-export-container").show();
+    
+
+
+  });
+
+  $("#menu-export").on("click", function(e) {
+    e.preventDefault();
+    e.stopPropagation();
+
+    if ( $("#import-export-button").length < 1 ) { //only executes if export button is not created. to prevent creating multiple buttons
+
+      $("#import-export-container").show();
+      var csvexport = getCSVexport();
+      $("textarea#import-export-text").text(csvexport);
+
+      //creates a which is csv download link
+      var a = document.createElement('a');
+      with (a) {
+      href='data:text/csv;base64,' + btoa(csvexport);
+      download='csvfile.csv';
+      };
+      
+      var button = $("<button></button>").text("EXPORT");
+      $(button).attr("id","import-export-button");
+
+      $(button).appendTo(a);
+
+      $(a).appendTo("#import-export-container");
+
+      var button = $("<button></button>").text("CLOSE");
+      $(button).attr("id","import-export-close-button");
+      $(button).appendTo("#import-export-container");
+
+      $( "#import-export-close-button" ).click(function() {
+        //clean export and hide box.
+        $("#import-export-container").remove("<a>");
+        $("#import-export-button").remove();
+        $("#import-export-close-button").remove();
+        $("#import-export-container").hide();
+      });
+
+    };
+
+  });
+
+  $(window).on('beforeunload', function() {
+    return "Do you really want to leave now?";
+  });
 
   /* Language list listener */
 
@@ -146,17 +195,31 @@ function showWordbyword() {
 IMPORT EXPORT FUNCTONS
 *******************************************************/
 
+function getCSVexport() {
+  creactetheWords();
+  var string = "";
+  for (var i = 0; i < theWords.length; i++) {
+    string = string + theWords[i].first;
+    string = string + ","
+    string = string + theWords[i].second;
+    string = string + "\n"
+  };
+  return(string);
+};
 
 /*******************************************************
 QUIZZ FUNCTIONS
 *******************************************************/
 
-function initiateQuiz() {
+function creactetheWords() {
+
   var firstlanguage = document.getElementsByName("first-language")[0].value;
   var secondlanguage =  document.getElementsByName("second-language")[0].value;
   var a = document.getElementsByClassName("wordlist-area-input")[0];
 
-  //first in theWords object keeps track of langages
+  theWords = new Array(); // clear the words
+
+  //first in theWords object keeps track of languages
   thisWord = new Object();
   thisWord.first = firstlanguage;
   thisWord.second = secondlanguage;
@@ -184,22 +247,20 @@ function initiateQuiz() {
     //read text area input
     var a = document.getElementsByClassName("wordlist-area-input");
     var lines = new Array();
-    for (var x = 0; x < a.length; x++) {
+    for (var i = 0; i < a.length; i++) {
+      lines[i] = new Array();
       var txtBox = a[i];
       var linestmp1 = txtBox.value.split("\n");
-      var linestmp2 = new Array();
-      var n = 0;
-      for (var i=0; i < linestmp1.length; i++) {
-        linestmp2[i] = linestmp1[i].split(",");
-        for (var j = 0; j < linestmp2[i].length; j++) {
-          lines[x][n] = linestmp2[i][j];
-          n++;
+      for (var x = 0; x < linestmp1.length; x++) {
+        var linestmp2 = linestmp1[x].split(",");
+        for (var y = 0; y < linestmp2.length; y++) {
+          lines[i].push(linestmp2[y]);
         };
-      };
+      };     
     };
 
-    for (var i = 0; i < lines1.length; i++) {
-      if ((lines[0][i] != "") && (lines[1][i] != "")) { //removes blank entres. for instance if booth coma and linebreak is used between two words
+    for (var i = 0; i < lines[0].length; i++) {
+      if ((lines[0][i] != "") && (lines[1][i] != "")) { //removes blank entries. for instance if booth coma and line break is used between two words
         thisWord = new Object();
         thisWord.first = lines[0][i];
         thisWord.second = lines[1][i];
@@ -213,10 +274,18 @@ function initiateQuiz() {
 
     
   };
-  //theWords array of objects created containing wordlist.
+};
 
-  //Hiding the start page elements and moving on to initilize the desired quiz.
-  //Only one quiz type is availiable but seperating the functions and container elements makes it easier to add more if desired later.
+
+
+function initiateQuiz() {
+  
+  creactetheWords();
+
+  //theWords array of objects created containing word list.
+
+  //Hiding the start page elements and moving on to initialize the desired quiz.
+  //Only one quiz type is available but separating the functions and container elements makes it easier to add more if desired later.
 
   document.getElementById("start-view-container").style.display = "none";
   document.getElementById("quiz-view-container").style.display = "block";
@@ -263,7 +332,7 @@ function quiz(choice){
   case 1:
     document.getElementById("quiz-view-container").style.display = "block";
 
-    //first check if there are still words that havent been answered correct
+    //first check if there are still words that haven't been answered correct
     var flag = false;
     for (var i = 1; i < theWords.length; i++) { //skips the first word cause it contains the active languages
       if (theWords[i].correct > 0) {
@@ -273,7 +342,7 @@ function quiz(choice){
     var found = false;
     var foundnumber = -1;
     for (var i = 1; found == false && i<theWords.length+50; i++) { //finds a random word with zero correct answers. breaks if not found on words+50 and simply picks the first in the array instead with zero correct
-      var rand = random(1,theWords.length-1); //generates random variable between 1 and the amount of words excluding the langauge setting
+      var rand = random(1,theWords.length-1); //generates random variable between 1 and the amount of words excluding the language setting
       if (theWords[rand].correct < 1) {
         found = true;
         foundnumber = rand;
@@ -288,7 +357,7 @@ function quiz(choice){
       };
     };
 
-    if (found == true) { //find word sequence failed all words have been answered correct. break quiz here
+    if (found == true) { //if find word sequence failed all words have been answered correct. go to finals and break quiz
 
     var t = document.createTextNode(theWords[foundnumber].first);
     var p = document.createElement("p");
@@ -300,18 +369,25 @@ function quiz(choice){
     input.className = "quiz-answer";
     input.id = "the-quiz-answer";
     input.type = "text";
+    input.placeholder = "Type your answer";
     document.getElementById("quiz-answer").appendChild(input);
+
+    var div = document.createElement("div")
+    div.className = "block-clear";
+    document.getElementById("quiz-answer").appendChild(div);
 
     var t = document.createTextNode("Answer");
     var button = document.createElement("button");
     button.id = "quiz-answer-button";
     button.appendChild(t);
     button.addEventListener('click', function(){
+        this.parentNode.removeChild(this); //first remove answer button once clicked
+        document.getElementById("the-quiz-answer").disabled = true //locks the answer box
         if (checkAnswer(foundnumber) == true) {
           var div = document.createElement("div")
           div.className = "block-clear";
           document.getElementById("quiz-answer").appendChild(div);
-          var t = document.createTextNode("Correct!");
+          var t = document.createTextNode("Correct! Click for next.");
           var button = document.createElement("button");
           button.id = "quiz-correct-answer-button";
           button.appendChild(t);
@@ -324,7 +400,7 @@ function quiz(choice){
           var div = document.createElement("div")
           div.className = "block-clear";
           document.getElementById("quiz-answer").appendChild(div);
-          var t = document.createTextNode("Sorry wrong!");
+          var t = document.createTextNode("Sorry wrong! Click for next.");
           var button = document.createElement("button");
           button.id = "quiz-wrong-answer-button";
           button.appendChild(t);
@@ -348,6 +424,7 @@ function quiz(choice){
       });
     document.getElementById("quiz-answer").appendChild(button);
 
+
     } else {
 
     //clears the quiz and prints final results and end message
@@ -366,15 +443,19 @@ function quiz(choice){
     var table = document.createElement("table");
     var tr = document.createElement("tr");
     var td = document.createElement("td");
-    var t = document.createTextNode("Native language");
-    td.appendChild(t);
+    var span = document.createElement("span");
+    span.className = "lang-lg";
+    span.lang = theWords[0].first;
+    td.appendChild(span);
     tr.appendChild(td);
     var td = document.createElement("td");
-    var t = document.createTextNode("Foreign language");
-    td.appendChild(t);
+    var span = document.createElement("span");
+    span.className = "lang-lg";
+    span.lang = theWords[0].second;
+    td.appendChild(span);
     tr.appendChild(td);
     var td = document.createElement("td");
-    var t = document.createTextNode("Mistakes made");
+    var t = document.createTextNode("Mistakes");
     td.appendChild(t);
     tr.appendChild(td);
     table.appendChild(tr);
@@ -406,7 +487,7 @@ function quiz(choice){
     button.id = "quiz-to-start-button";
     button.appendChild(t);
     button.addEventListener('click', function(){
-      quizErazer(); //restarts the quiz for another word after wrong
+      quizErazer(); 
       document.getElementById("quiz-view-container").style.display = "none";
       document.getElementById("start-view-container").style.display = "block";
           });
@@ -416,7 +497,7 @@ function quiz(choice){
     
 
     break;
-    
+
   default:  //returns to input view if something is wrong
     document.getElementById("start-view-container").style.display = "block";
     document.getElementById("quiz-view-container").style.display = "none";
