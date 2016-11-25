@@ -22,8 +22,12 @@ I have used a mobile first design, starting with a simple layout and adding some
 
 The basic layout and function of the input words stage were done first. There was an issue with adapting the language selector plugin for bootstrap to work inside a form. A solution was found by sending the value to the bootstrap drop-down item and to hidden form field when a selection is made via javascript.
 
-I have prepared for adding more ways of doing the quiz later by using a switch in the function. The quizzes have recurisvity calling themselves from a listener sub-function in the quiz function and keep going until the desired state of the array theWords (counting right and wrong answers in each word object) is reached.
+I have prepared for adding more ways of doing the quiz later by using a switch in the function. The quizzes have recursive function calling themselves from a listener sub-function in the quiz function and keep going until the desired state of the array theWords (counting right and wrong answers in each word object) is reached.
+
+The layout switches to a four column grid and adds an advertisement for large screens. This setup with blank margin bootstrap grids is really unnecessary and maybe an afterthought to fulfill the requirement of the page adapting to three screen sizes. I think maybe simply having a one and two column setup in a max-with container would have sufficed.
 
 
 ### Notes
   * The [bootstrap languages plugin](https://github.com/usrz/bootstrap-languages) has been edited to display "Other language" rather then "Unknown language"
+
+  ![alt text](http://www.larcentrum.se/ostersund/wp-content/uploads/sites/13/2015/12/logo_lernia.png "Lernia Logo")
