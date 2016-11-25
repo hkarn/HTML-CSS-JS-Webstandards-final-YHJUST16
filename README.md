@@ -8,9 +8,12 @@
 Live at <https://arnoldson.online/uppgifter/gradingassignment1-YHJUST16/>
 
 ### Technologies
-  * Bootstrap for grid column design and navigation bar.
-  * jQuery for ..
+  * Bootstrap 3.
+  * jQuery.
   * CSS, HTML, JS.
+  * Font Awesome.
+  * Languages for Bootstrap 3.
+
 
 ### Method
 I have used a mobile first design, starting with a simple layout and adding some possible complexity later. Though emphasis has been on the scripting inputs and the quizzes more then the design. The project will use a single responsive, interactive page.
