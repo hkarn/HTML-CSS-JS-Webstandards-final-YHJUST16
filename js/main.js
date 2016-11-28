@@ -1,23 +1,34 @@
-/*
-By Håkan K Arnoldson
-https://github.com/hkarn/HTML-CSS-JS-Webstandards-final-YHJUST16
-*/
+/**
+ * By Håkan K Arnoldson
+ * https://github.com/hkarn/HTML-CSS-JS-Webstandards-final-YHJUST16
+ */
 
-// some jQuery functions
+/**
+ * The assignment required some things to be done using jQuery. jQuery is used for the import/export elements as well as the advertisement
+ * The jQuery should be first in the appropriate sections.
+ */
 
-function checkSize(){
+/**
+ * When the size of the window is changed this function checks if the css rule to change the color on advertisement has changed.
+ * It is better to use a media query to check for size changes, then to check the size directly inside the script. 
+ * Because they can behave differently and create extra breakpoints.
+ * The reason to do any of this with jQuery and not all in CSS is display: none can make any fade out transition not show with just CSS and keyframes.
+ */
 
-  /*checks for a change from the css media query for the advertisement.
-  handled by jQuery booth due to assignment specification demands and problems with 
-  fadeout on display: none using keyframes */
+/*******************************************************
+STYLING FUNCTONS
+*******************************************************/
 
-    if ($('#right-advertisment').css('color') == 'rgb(0, 0, 0)' ){
-      $('#right-advertisment').fadeOut(340);
-    };
-    if ($('#right-advertisment').css('color') == 'rgb(255, 255, 255)' ){
-      $('#right-advertisment').fadeIn(5000);
-    };
+function checkSize() {
+
+  if ($('#right-advertisment').css('color') == 'rgb(0, 0, 0)' ){
+    $('#right-advertisment').fadeOut(340);
+  };
+  if ($('#right-advertisment').css('color') == 'rgb(255, 255, 255)' ){
+    $('#right-advertisment').fadeIn(5000);
+  };
 };
+
 
 
 /*******************************************************
@@ -25,138 +36,150 @@ INITATIE LISTENERS
 *******************************************************/
 
 window.onload = function() {
-  
-  //jQuery on load
+
+  /** Fades in advertisement if window is wide enough */
   if ($('#right-advertisment').css('color') == 'rgb(255, 255, 255)' ){
     $('#right-advertisment').fadeIn(6000);
     };
-  $(window).resize(checkSize);
+  $(window).resize(checkSize); //adds listener on resize to handle advertisement
 
 
-  // IMPORT
+  /** Listener opens the IMPORT window */
   $("#menu-import").on("click", function(e) {
     e.preventDefault();
     e.stopPropagation();
 
-    if ( $("#import-export-container").css("display") == "none" ) {
-
+    if ( $("#import-export-container").css("display") == "none" ) {   //check if window is already open
       $("#import-export-container").show();
+      $("#menu-import").css("color", "#fff");                         //sets import button white
       var button = $("<button></button>").text("IMPORT");
       $(button).attr("id","import-export-button");
-      $(button).appendTo("#import-export-container");
+      $(button).appendTo("#import-export-container");                 //import button is added
 
-      $( "#import-export-button" ).click(function() {
-        //import
+      $( "#import-export-button" ).click(function() {                 //listener on the import button executes importCSV function sending textarea contents.
         importCSV($("textarea#import-export-text").val());
       });
 
-      var button = $("<button></button>").text("CLOSE");
-      $(button).attr("id","import-export-close-button");
-      $(button).appendTo("#import-export-container");
-
+      drawExpImpCloseButton();
       $( "#import-export-close-button" ).click(function() {
-        //clean export and hide box.
-        $("#import-export-container").find('a').remove();
-        $("#import-export-button").remove();
-        $("#import-export-close-button").remove();
-        $("#import-export-container").hide();
+        closeImportExport();
       });
-
-    }
-    
-
-
+    } else {
+      closeImportExport(); //closes the window if it is already open allowing the import export buttons to work as toggles.
+    };
   });
 
 
-  // EXPORT
+  /** Listener opens the EXPORT window */
   $("#menu-export").on("click", function(e) {
     e.preventDefault();
     e.stopPropagation();
 
-    if ( $("#import-export-container").css("display") == "none" ) { //only executes if import/export window is closed
-
+    if ( $("#import-export-container").css("display") == "none" ) {     //check if window is already open
+      $("#menu-export").css("color", "#fff");                           //sets export button white
       $("#import-export-container").show();
-      var csvexport = getCSVexport();
-      $("textarea#import-export-text").text(csvexport);
+      var csvexport = getCSVexport();                                   //getCSVexport returns the finished csv from the contents of the word input fields or textareas
+      $("textarea#import-export-text").val(csvexport);                  //writes the csv to the export textarea
 
-      //creates a which is csv download link
-      var a = document.createElement('a');
+      var a = document.createElement('a');                              //creates and anchor element with a download link to the csv
       with (a) {
-      href='data:text/csv;base64,' + btoa(csvexport);
-      download='csvfile.csv';
+        href='data:text/csv;charset=utf-8,' + '\uFEFF' + encodeURIComponent(csvexport); //\uFEFF makes excel and calc recognize the UTF8, encodeURIComponent() method encodes the string properly.
+        download='wordsfile.csv';
       };
-      
       var button = $("<button></button>").text("EXPORT");
       $(button).attr("id","import-export-button");
-
-      $(button).appendTo(a);
-
-      $(a).appendTo("#import-export-container");
-
-      var button = $("<button></button>").text("CLOSE");
-      $(button).attr("id","import-export-close-button");
-      $(button).appendTo("#import-export-container");
-
+      $(button).appendTo(a);                                    //the EXPORT button is appended to show inside the download anchor
+      $(a).appendTo("#import-export-container");                //download anchor is drawn on page
+      
+      drawExpImpCloseButton();
       $( "#import-export-close-button" ).click(function() {
-        //clean export and hide box.
-        $("#import-export-container").find('a').remove();
-        $("#import-export-button").remove();
-        $("#import-export-close-button").remove();
-        $("#import-export-container").hide();
+        closeImportExport();
       });
-
+    } else {
+      closeImportExport();            //closes the window if it is already open allowing the import export buttons to work as toggles.
     };
-
   });
 
-  //LEAVE LISTENER
+  /** 
+  * LEAVE LISTENER
+  * This one can be pretty annoying but so can accidentally clicking an outbound link after entering 100 word pairs that haven't been exported.
+  */
   $(window).on('beforeunload', function() {
     return "Do you really want to leave now?";
   });
 
 
 
-  /* Language list listener */
+  /**
+   * Language list listener
+   * places listeners that execute selectLang() on click on all the languages in the language selection menus.
+   */
 
   var a = document.getElementsByClassName("language-list");
   for(var i = 0; i < a.length; i++){
     var b = a[i].getElementsByTagName('li');
     for(var j = 0; j < b.length; j++){
       b[j].addEventListener('click', function(){
-         selectLang(this);
+        selectLang(this.lang,this.parentNode.parentNode);    //sends the lang value of the element and also the position of which dropup lang meny it is for it to work. 
+                                                             //here the lang can be extracted from position but on drag and drop it cant
        });
     };
   };
 
-  /* Word input type selector */
+  var a = document.getElementsByClassName("selected_lang-menu");
+  for(var i = 0; i < a.length; i++){
+    a[i].addEventListener('dragover', function(e){
+      e.preventDefault();
+    });
+    a[i].addEventListener('drop', function(e){
+      selectLang(e.dataTransfer.getData("lang"),this.parentNode.parentNode);
+    });
+  };
 
-  var a = document.getElementById("wordbyword-button");
+  var a = document.getElementById("main-header-flags").getElementsByTagName("div")[0].getElementsByTagName("span");
+  for(var i = 0; i < a.length; i++){
+    a[i].addEventListener('dragstart', function(e){
+      e.dataTransfer.setData("lang", this.lang);
+    });
+  };
+
+
+  
+
+
+
+  /**
+   * Word input type selector
+   * Places the listeners that shows textarea or input boxes for the words
+   */
+  var a = document.getElementById("wordbyword-button");   //word for word
   a.addEventListener('click', function(){
          showWordbyword();
        });
 
-  var a = document.getElementById("copylists-button");
+  var a = document.getElementById("copylists-button");    //textarea
   a.addEventListener('click', function(){
          showTextarea();
        });
 
-  /* Add word lines in word by word input */
-
+  /**
+   * Add word lines in word by word input 
+   * Adds more lines for words
+   */
   var a = document.getElementsByClassName("addline-button");
-  for(var i = 0; i < a.length; i++){
+  for(var i = 0; i < a.length; i++){                            //in booth columns
     a[i].addEventListener('click', function(){
          addLine();
        });
   };
 
-  /* Start quiz */
-
+  /* Start quiz 
+   * Listener for the start quiz button
+   */
   var a = document.getElementById("start-quiz-button");
   a.addEventListener('click', function(){
          initiateQuiz();
        });
-
 };
 
 
@@ -165,24 +188,45 @@ window.onload = function() {
 GLOBAL
 *******************************************************/
 
-theWords = new Array();
+theWords = new Array();   
+/** array that will be filled with the word objects
+ * each object in the array will contain
+ * first = word in first language
+ * second = word in second language
+ * correct = number of times the word has been answered correctly
+ * mistakes = number of time the word has been answered wrong
+ *
+ * Except the [0] object in the list where first is the first language in short form, second the second language in short form
+ * and correct and mistakes are set to -1
+ */
+
+
 
 /*******************************************************
 INPUT VIEW FUNCTIONS
 *******************************************************/
 
-function selectLang(position) {
-  var language = position.getAttribute('lang');
-  var a = position.parentNode.parentNode;
-  var b = a.getElementsByTagName('button')[0].getElementsByTagName('span')[0];
-  b.setAttribute('lang', language);
-  var c = a.getElementsByTagName('input')[0];
-  c.setAttribute('value', language);
+/**
+ * Function changes the selected item in the language list drop up it also
+ * stores the selected value in a hidden input for easier use
+ * There is a lot of navigation here rather then ids for it too work in either menu
+ * language is language abbreviation
+ * position is the .btn-group .dropup menu for language
+ */
+function selectLang(language,position) {
+  var b = position.getElementsByTagName('button')[0].getElementsByTagName('span')[0];
+  b.setAttribute('lang', language);                                             //after some navigation sets the lang attribute of the span that shows when drop up is closed
+  var c = position.getElementsByTagName('input')[0];
+  c.setAttribute('value', language);                                            //stores the selected value in a hidden input
 };
 
-function addLine() {
-  /* Adds another input line for word by word */
 
+/** 
+ * Function adds more lines in the word by word input view 
+ * Creates a new li inside booth ol elements
+ * li contains an input element of type text with classname a-word
+ */
+function addLine() {
   var a = document.getElementsByClassName("wordlist-lines-thelines");
   for (var i = 0; i < a.length; i++){
     var li = document.createElement("li");
@@ -192,25 +236,27 @@ function addLine() {
     li.appendChild(input);
     a[i].appendChild(li);
   };
-
 };
 
+
+/** Shows textarea word input view and changes color of selected active choice button */
 function showTextarea() {
-  /* Shows text area input style and changes color of selected active choice button */
   var a = document.getElementsByClassName("wordlist-area-input");
   var b = document.getElementsByClassName("wordlist-lines-input");
   for(var i = 0; i < a.length; i++){
-    a[i].style.display="inline-block";
-    b[i].style.display="none";
+    a[i].style.display="inline-block";  //shows all a
+    b[i].style.display="none";          //hides all b
   };
+  /** swap button colours */
   document.getElementById("wordbyword-button").style.backgroundColor="white";
   document.getElementById("copylists-button").style.backgroundColor="rgb(2, 117, 216)";
   document.getElementById("wordbyword-button").style.color="black";
   document.getElementById("copylists-button").style.color="white";
 };
 
+
+/** Shows word by word input style and changes color of selected active choice button */
 function showWordbyword() {
-  /* Shows word by word input style and changes color of selected active choice button */
   var a = document.getElementsByClassName("wordlist-area-input");
   var b = document.getElementsByClassName("wordlist-lines-input");
   for(var i = 0; i < a.length; i++){
@@ -223,71 +269,96 @@ function showWordbyword() {
   document.getElementById("copylists-button").style.color="black";
 };
 
+
+
 /*******************************************************
 IMPORT EXPORT FUNCTONS
 *******************************************************/
 
+/** This function creates the CLOSE button in the Import/Export view */
+function drawExpImpCloseButton() {
+  var button = $("<button></button>").text("CLOSE");
+  $(button).attr("id","import-export-close-button");
+  $(button).appendTo("#import-export-container");
+};
+
+
+/** This function closes the Import/Export box and destroys the created DOM-elements so they can be re-created. */
+function closeImportExport(x) {
+  $("#import-export-container").find('a').remove();
+  $("#import-export-button").remove();
+  $("#import-export-close-button").remove();
+  $("#import-export-container").hide();
+  //reset boot import and export main nav item. probably easier to just do booth then to check which window was closed. since booth buttons can toggle each-other.
+  $("#menu-export").css("color", "");
+  $("#menu-import").css("color", "");
+};
+
+
+/** Reads theWords and puts them into comma separated string that is returned */
 function getCSVexport() {
-  creactetheWords();
+  creactetheWords();  //theWord is rebuilt from the inputs or textareas
   var string = "";
   for (var i = 0; i < theWords.length; i++) {
-    string = string + theWords[i].first;
-    string = string + ","
-    string = string + theWords[i].second;
-    string = string + "\n"
-  };
+    string = string + theWords[i].first;          //first word
+    string = string + ","                         //coma
+    string = string + theWords[i].second;         //second word
+    string = string + "\n"                        //new line
+  };                                              //repeat
   return(string);
 };
 
+
+/** Reads string that comes from import text area and outputs it as two separate lists in the words textareas */
 function importCSV(csv) {
+  document.getElementById("copylists-button").click();      //changes to textareas word input mode by clicking the button
 
-  document.getElementById("copylists-button").click();
+  var tmp1 = csv.split("\n");         //creates one array with each line from the import
+  var list1 = "";                     //declares the first list to be created
+  var list2 = "";                     //declares the second list to be created
 
-  var tmp1 = csv.split("\n");
-  var list1 = "";
-  var list2 = "";
+  if (tmp1.length > 0) {                                                    //if there was contents
+    var tmp2 = tmp1[0].split(",");                                          //splits the first line on the comma. the first line should contain the languages used in short form
+    if (tmp2.length > 0) {                                                  //checking if we got something to avoid errors, this will find two "" if the line has only a coma
+      var e = document.getElementsByClassName("selected_lang-menu");        //we want the imported language to show in the language selection dropups 
+      e[0].lang = tmp2[0];                                                  //sets first language in the dropup
+      e[1].lang = tmp2[1];                                                  //sets second language in the dropup
+      document.getElementsByName("first-language")[0].value = tmp2[0];      //sets value of the hidden input
+      document.getElementsByName("second-language")[0].value = tmp2[1];     //sets value of the hidden input
+    };
 
-  //sets languages from first row
+    for (var i = 1; i < tmp1.length; i++) {                                 //we need to read the rest of the import starting from the second line
+      var tmp2 = tmp1[i].split(",");                                        //split the current line on coma
+      if (tmp2.length > 1) {                                                //if there was smt in the current line
+      list1 = list1 + tmp2[0] + "\n";                                       //append what is before the first coma on the line to list1 and newline
+      list2 = list2 + tmp2[1] + "\n";                                       //append what is after the first coma (and before any possible second coma) on the line to list2 and newline
+      };                                                                    //if a line for some reason should have more then one coma anything after the second coma will be discarded
+    };
 
-  if (tmp1.length > 0) {
-
-    var tmp2 = tmp1[0].split(",");
-
-    if (tmp2.length > 0) {
-      var e = document.getElementsByClassName("selected_lang-menu");
-      e[0].lang = tmp2[0];
-      e[1].lang = tmp2[1];
-      document.getElementsByName("first-language")[0].value = tmp2[0];
-      document.getElementsByName("second-language")[0].value = tmp2[1];;
-    }
-
-    for (var i = 1; i < tmp1.length; i++) {
-      var tmp2 = tmp1[i].split(",");
-      if (tmp2.length > 1) {
-      list1 = list1 + tmp2[0] + "\n";
-      list2 = list2 + tmp2[1] + "\n";
-      }
-    }
-
-    var e = document.getElementsByClassName("wordlist-area-input");
+    var e = document.getElementsByClassName("wordlist-area-input");         //writes the lists to the corresponding textareas
     e[0].value = list1;
     e[1].value = list2;
   }
 }
 
+
+
 /*******************************************************
 QUIZZ FUNCTIONS
 *******************************************************/
 
+/**
+ *  Function for building theWords array. Filling it with objects from the selected input mode.
+ */
 function creactetheWords() {
 
-  var firstlanguage = document.getElementsByName("first-language")[0].value;
-  var secondlanguage =  document.getElementsByName("second-language")[0].value;
-  var a = document.getElementsByClassName("wordlist-area-input")[0];
+  var firstlanguage = document.getElementsByName("first-language")[0].value;            //checks first language from the hidden input
+  var secondlanguage =  document.getElementsByName("second-language")[0].value;         //checks second language from the hidden input
+  var a = document.getElementsByClassName("wordlist-area-input")[0];                    //stores the first language textarea to be able to run tests on it to determine the state of the page            
 
-  theWords = new Array(); // clear the words
+  theWords = new Array(); // clears the array
 
-  //first in theWords object keeps track of languages
+  /** First in theWords object keeps track of languages */
   thisWord = new Object();
   thisWord.first = firstlanguage;
   thisWord.second = secondlanguage;
@@ -295,79 +366,85 @@ function creactetheWords() {
   thisWord.mistakes = -1;
   theWords[0] = thisWord;
 
-  if (window.getComputedStyle(a, null).getPropertyValue("display") == "none") { 
-    // read word by word input
-    var a = document.getElementsByClassName("wordlist-lines-thelines")[0].getElementsByClassName("a-word");
-    var b = document.getElementsByClassName("wordlist-lines-thelines")[1].getElementsByClassName("a-word");
-    for (var i = 0; i < a.length; i++) {
-      if ((a[i].value != "") && (b[i].value != "")) { //removes blanks
+  if (window.getComputedStyle(a, null).getPropertyValue("display") == "none") {                   //getComputedStyle finds out the css property as currently displayed to the user
+    /** Textarea is hidden for the user. Read from word by word input mode */
+    var a = document.getElementsByClassName("wordlist-lines-thelines")[0].getElementsByClassName("a-word");     //stores the inputs in the first ol as a
+    var b = document.getElementsByClassName("wordlist-lines-thelines")[1].getElementsByClassName("a-word");     //stores the inputs in the second ol as b
+    for (var i = 0; i < a.length; i++) {                  //the lists will be equal in length so a or b doesn't matter. since there is only a few lines of codes in one place that changes the length of the ol having a fail check here to prevent it from going out of bounds seemed unnecessary
+      if ((a[i].value != "") && (b[i].value != "")) {     //removes blanks
         thisWord = new Object();
         thisWord.first = a[i].value;
         thisWord.second = b[i].value;
         thisWord.correct = 0;
         thisWord.mistakes = 0;
-
         theWords.push(thisWord);
       };
     };
 
   } else {
-    //read text area input
+    /** Textarea is shown to the user. Read from it */
     var a = document.getElementsByClassName("wordlist-area-input");
-    var lines = new Array();
-    for (var i = 0; i < a.length; i++) {
-      lines[i] = new Array();
-      var txtBox = a[i];
-      var linestmp1 = txtBox.value.split("\n");
-      for (var x = 0; x < linestmp1.length; x++) {
-        var linestmp2 = linestmp1[x].split(",");
-        for (var y = 0; y < linestmp2.length; y++) {
+    var lines = new Array();                                    //lines will be the sorted out multidimensional array we will build theWords from later
+    for (var i = 0; i < a.length; i++) {                        //run the code below 2 times (for each textarea list)
+      lines[i] = new Array();                                   //the first dimension of the array determines if it is first or second language
+      var linestmp1 = a[i].value.split("\n");                   //current textbox content -> array with each line as item
+      for (var x = 0; x < linestmp1.length; x++) {              //iterate over the newlines
+        var linestmp2 = linestmp1[x].split(",");                //split again on coma (the code can take either newline or coma or booth as word separators)
+        for (var y = 0; y < linestmp2.length; y++) {            //iterate over the latest split strings
           lines[i].push(linestmp2[y]);
         };
-      };     
-    };
-
-    for (var i = 0; i < lines[0].length; i++) {
-      if ((lines[0][i] != "") && (lines[1][i] != "")) { //removes blank entries. for instance if booth coma and line break is used between two words
-        thisWord = new Object();
-        thisWord.first = lines[0][i];
-        thisWord.second = lines[1][i];
-        thisWord.correct = 0;
-        thisWord.mistakes = 0;
-
-        theWords.push(thisWord);
       };
     };
 
-
-    
+    for (var i = 0; i < lines[0].length; i++) {
+      if ((lines[0][i] != "") && (lines[1][i] != "")) {       //removes blank entries. for instance if booth coma and line break is used between two words
+        thisWord = new Object();                              
+        thisWord.first = lines[0][i];                         //iterate over first language list
+        thisWord.second = lines[1][i];                        //iterate over second language list
+        thisWord.correct = 0;
+        thisWord.mistakes = 0;
+        theWords.push(thisWord);                              //adds thisWord object to the array
+      };
+    };
   };
 };
 
 
-
+/** Function for starting the quiz sequence */
 function initiateQuiz() {
-  
   creactetheWords();
-
-  //theWords array of objects created containing word list.
-
-  //Hiding the start page elements and moving on to initialize the desired quiz.
-  //Only one quiz type is available but separating the functions and container elements makes it easier to add more if desired later.
-
-  document.getElementById("start-view-container").style.display = "none";
-  document.getElementById("quiz-view-container").style.display = "block";
-
-  quiz(1);
-
+  console.log(theWords);                                                      //build theWord array
+  if (theWords.length > 1) {                                                  //if there are words else tell the user to input some         
+  document.getElementById("start-view-container").style.display = "none";     //hide input word view
+  document.getElementById("quiz-view-container").style.display = "block";     //show quiz view
+  quiz(1);                                                                    //launches quiz of type 1.
+  //only one type of quiz exists for now, could read this number from a selector instead if more are added
+  } else {
+    var t = document.createTextNode("Please input some words first!");
+    var p = document.createElement("p");
+    p.style.padding = "12px";
+    p.style.fontSize = "1.3em";
+    p.style.color = "red";
+    p.appendChild(t);                                                           //words are needed!
+    document.getElementById("start-quiz-button").parentNode.appendChild(p);
+    setTimeout(function(){                                                      //shows the p telling words are needed for 2000 seconds then remove
+      document.getElementById("start-quiz-button").parentNode.removeChild(p);
+    },2200);
+  };
 };
 
-// QUIZ FUNCTIONS
 
+/** Random number function - generates and returns a random number from and including min to and including max. Taken from the random number guess game project */
 function random(min,max) {
   return (Math.floor(Math.random() * (parseInt(max,10) - parseInt(min,10) + 1)) + parseInt(min,10));
 };
 
+
+/** 
+ * Checks the answer. Could later take a second variable for quiz type if other types of tests are necessary 
+ * If the foreign word at index foundnumber equals the string in the answer box correct++ else mistake ++
+ * Also returns if the answer is true or false 
+ */
 function checkAnswer(foundnumber) {
   if (theWords[foundnumber].second == document.getElementById("the-quiz-answer").value) {
     theWords[foundnumber].correct++;
@@ -379,34 +456,35 @@ function checkAnswer(foundnumber) {
 
 };
 
+
+/** 
+ * Eraser function to delete created elements for the quiz question. Could take quiz type as variable later for more quiz types. 
+ * Iterates over all the child elements of a set node and removes them. For each node to delete the contents inside.
+ */
 function quizErazer() {
   var myNode = document.getElementById("quiz-question");
-        while (myNode.firstChild) {
-          myNode.firstChild.style.display = "none";
-          myNode.removeChild(myNode.firstChild);
-        };
-        var myNode = document.getElementById("quiz-answer");
-        while (myNode.firstChild) {
-          myNode.firstChild.style.display = "none";
-          myNode.removeChild(myNode.firstChild);
-        };
+  while (myNode.firstChild) {
+    myNode.firstChild.style.display = "none";
+    myNode.removeChild(myNode.firstChild);
+  };
+  var myNode = document.getElementById("quiz-answer");
+  while (myNode.firstChild) {
+    myNode.firstChild.style.display = "none";
+    myNode.removeChild(myNode.firstChild);
+  };
 };
 
+
+/** 
+ * The main quiz function.
+ * Takes the type of quiz and uses a switch to execute the right one.
+ * This far only one type quiz exists cause it seemed sufficient for the assignment.
+ */
 function quiz(choice){
-
-//this is made to make it easy to add more quiz types later.
-
   switch(choice) {
   case 1:
-    document.getElementById("quiz-view-container").style.display = "block";
+    document.getElementById("quiz-view-container").style.display = "block";   //displays the quiz container
 
-    //first check if there are still words that haven't been answered correct
-    var flag = false;
-    for (var i = 1; i < theWords.length; i++) { //skips the first word cause it contains the active languages
-      if (theWords[i].correct > 0) {
-        flag = true;
-      };
-    };
     var found = false;
     var foundnumber = -1;
     for (var i = 1; found == false && i<theWords.length+50; i++) { //finds a random word with zero correct answers. breaks if not found on words+50 and simply picks the first in the array instead with zero correct
@@ -461,7 +539,7 @@ function quiz(choice){
           button.appendChild(t);
           button.addEventListener('click', function(){
             quizErazer(); //restarts the quiz for another word after correct
-            quiz(1); 
+            quiz(1);
           });
           document.getElementById("quiz-answer").appendChild(button);
         } else {
@@ -488,7 +566,7 @@ function quiz(choice){
 
         };
 
-        
+
       });
     document.getElementById("quiz-answer").appendChild(button);
 
@@ -555,14 +633,14 @@ function quiz(choice){
     button.id = "quiz-to-start-button";
     button.appendChild(t);
     button.addEventListener('click', function(){
-      quizErazer(); 
+      quizErazer();
       document.getElementById("quiz-view-container").style.display = "none";
       document.getElementById("start-view-container").style.display = "block";
           });
       document.getElementById("quiz-answer").appendChild(button);
     };
 
-    
+
 
     break;
 
