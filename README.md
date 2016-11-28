@@ -26,8 +26,12 @@ I have prepared for adding more ways of doing the quiz later by using a switch i
 
 The layout switches to a four column grid and adds an advertisement for large screens. This setup with blank margin bootstrap grids is really unnecessary and maybe an afterthought to fulfill the requirement of the page adapting to three screen sizes. I think maybe simply having a one and two column setup in a max-with container would have sufficed.
 
+HTML5 drag and drop function was added as a **hidden feature**. Flag can be dragged from the list at the top and dropped onto either language selector.
+
 
 ### Notes
   * The [bootstrap languages plugin](https://github.com/usrz/bootstrap-languages) has been edited to display "Other language" rather then "Unknown language"
+
+
 
   ![alt text](http://www.larcentrum.se/ostersund/wp-content/uploads/sites/13/2015/12/logo_lernia.png "Lernia Logo")
