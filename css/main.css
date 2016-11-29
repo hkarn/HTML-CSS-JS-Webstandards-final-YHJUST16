@@ -55,11 +55,11 @@ INPUT WORDS VIEW
    ========================================================================== */
 
 
-/* advertisement */
+/* Advertisement */
 
 #right-advertisment {
   position: absolute;
-  color: white;
+  color: white;           /* for js to check if media query */
   right: 0;
   top: 45%;
   height: 35%;
@@ -91,16 +91,26 @@ INPUT WORDS VIEW
 }
 
 #main-header {
+  position: relative;
+  margin: auto;
+  display: block;
   text-align: center;
   padding: 0 15px 15px 15px;
   min-height:250px;
+}
+
+@media only screen and (max-width: 767px) {     /*reduce height when flags disappear */
+  #main-header {
+  min-height:210px;
+  height:210px;
+  }
 }
 
 .main-nav-icon {
   float: left;
 }
 
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 767px) {   /*we need to add some space for the icons in the collapsed menu */
   .main-nav-link {
   margin-left: 20px;
   }
@@ -113,7 +123,7 @@ INPUT WORDS VIEW
 
 
 
-/* Contents */
+/* Content */
 
 .input-selector {
   padding-bottom: 25px;
@@ -179,33 +189,29 @@ INPUT WORDS VIEW
   margin:auto;
 }
 
-/* Color and style
+
+
+/* Color and surface styling
    ========================================================================== */
 
 
 /* Header & top nav */
 
-#main-header {
-  display: block;
-  position: relative;
-  margin: auto;
-}
-
 #main-header h1 {
   padding-top: 20px;
   font-size: 3em;
   font-weight: bold;
-  color:midnightblue;
+  color: midnightblue;
+}
+
+@media only screen and (max-width: 767px) {   /* the title up a little on small screens */
+  #main-header h1 {
+  padding-top: 10px;
+  }
 }
 
 #main-header h2 {
   font-size: 1.6em;
-}
-
-@media only screen and (max-width: 767px) {
-  #main-header {
-  height:200px;
-  }
 }
 
 #main-header:before {
@@ -221,7 +227,7 @@ INPUT WORDS VIEW
   opacity: 0.1;
 }
 
-@media only screen and (max-width: 767px) {
+@media only screen and (max-width: 767px) {   /* move the background up when flags disappear */
   #main-header:before {
   top: 0;
   }
@@ -236,11 +242,11 @@ INPUT WORDS VIEW
 }
 
 #myNavbar ul li a:hover {
-  color: white;
+  color: #fff;
 }
 
 #myNavbar ul li a:focus {
-  color: white;
+  color: #fff;
 }
 
 
@@ -250,7 +256,7 @@ INPUT WORDS VIEW
   margin: auto;
 }
 
-#main-header-flags .overflow-center {
+#main-header-flags .overflow-center {   /*fix to make flags  disappear on booth sides rather then just the to the right */
   white-space: nowrap;
   margin-left: -100%;
   margin-right: -100%;
@@ -271,12 +277,12 @@ INPUT WORDS VIEW
   }
 }
 
-/* Contents */
+/* Content */
 
 hr {
   border: 0;
   height: 1px;
-  background-image: linear-gradient(to right, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.75), rgba(0, 0, 0, 0));
+  background-image: linear-gradient(to right, rgba(2, 117, 216, 0), rgba(2, 117, 216, 0.75), rgba(2, 117, 216, 0));
 }
 
 .a-word {
@@ -365,6 +371,8 @@ hr {
   font-color: grey;
 }
 
+
+
 /*******************************************************
 IMPORT/EXPORT VIEW
 *******************************************************/
@@ -409,6 +417,7 @@ IMPORT/EXPORT VIEW
   border-radius: 5px;
   width: 200px;
 }
+
 
 /*******************************************************
 QUIZZ VIEW
