@@ -126,26 +126,29 @@ window.onload = function() {
     };
   };
 
+
+  /**
+   * Listeners for
+   * Drag & Drop hidden feature
+   */
+
   var a = document.getElementsByClassName("selected_lang-menu");
   for(var i = 0; i < a.length; i++){
-    a[i].addEventListener('dragover', function(e){
+    a[i].parentNode.addEventListener('dragover', function(e){          //prevents default on dragover to language selector
       e.preventDefault();
     });
-    a[i].addEventListener('drop', function(e){
-      selectLang(e.dataTransfer.getData("lang"),this.parentNode.parentNode);
+    a[i].parentNode.addEventListener('drop', function(e){              //send the transfered data: the language and the dropup div where the flag was dropped
+      selectLang(e.dataTransfer.getData("lang"),this.parentNode);
     });
   };
 
+  /** places dragstart listener on every flag in the bar */
   var a = document.getElementById("main-header-flags").getElementsByTagName("div")[0].getElementsByTagName("span");
   for(var i = 0; i < a.length; i++){
     a[i].addEventListener('dragstart', function(e){
-      e.dataTransfer.setData("lang", this.lang);
+      e.dataTransfer.setData("lang", this.lang);        //sends data with drag the lang value for the span that is the flag
     });
   };
-
-
-  
-
 
 
   /**
@@ -485,32 +488,34 @@ function quiz(choice){
   case 1:
     document.getElementById("quiz-view-container").style.display = "block";   //displays the quiz container
 
-    var found = false;
-    var foundnumber = -1;
-    for (var i = 1; found == false && i<theWords.length+50; i++) { //finds a random word with zero correct answers. breaks if not found on words+50 and simply picks the first in the array instead with zero correct
-      var rand = random(1,theWords.length-1); //generates random variable between 1 and the amount of words excluding the language setting
-      if (theWords[rand].correct < 1) {
-        found = true;
-        foundnumber = rand;
+    var found = false;                                             //flag goes to true when question has been found (a word that was never answered correct)
+    var foundnumber = -1;                                          //declares the foundnumber variable to make sure it exists for later.
+    for (var i = 1; found == false && i<theWords.length+50; i++) { //finds a random word with zero correct answers. breaks if not found on words+50 and later simply picks the first in the array instead with zero correct
+      var rand = random(1,theWords.length-1);                      //generates random variable between 1 and the amount of words excluding the language setting
+      if (theWords[rand].correct < 1) {                            //if the word was never answered correct
+        found = true;                                              //found a question
+        foundnumber = rand;                                        //saves which question was found
       };
     };
-    if (found == false) {
-      for (var i = 1; i<theWords.length; i++) {
-        if (theWords[i].correct < 1) {
-          found = true;
-          foundnumber = i;
+    if (found == false) {                                          //if still no question has been found
+      for (var i = 1; i<theWords.length; i++) {                    //iterate over theWords
+        if (theWords[i].correct < 1) {                             //the first question without a correct answer found
+          found = true;                                            //was found
+          foundnumber = i;                                         //save which was found
         };
       };
     };
 
-    if (found == true) { //if find word sequence failed all words have been answered correct. go to finals and break quiz
+    if (found == true) {        //if find word sequence still has failed all words have been answered correct. go to finals and break quiz
 
+    /** Our question */
     var t = document.createTextNode(theWords[foundnumber].first);
     var p = document.createElement("p");
     p.className = "the-question";
     p.appendChild(t);
     document.getElementById("quiz-question").appendChild(p);
 
+    /** Our answerbox */
     var input = document.createElement("input");
     input.className = "quiz-answer";
     input.id = "the-quiz-answer";
@@ -518,75 +523,75 @@ function quiz(choice){
     input.placeholder = "Type your answer";
     document.getElementById("quiz-answer").appendChild(input);
 
-    var div = document.createElement("div")
+    /** Some space */
+    var div = document.createElement("div")                      
     div.className = "block-clear";
     document.getElementById("quiz-answer").appendChild(div);
 
-    var t = document.createTextNode("Answer");
+    /** Our answer button */
+    var t = document.createTextNode("Answer");                   
     var button = document.createElement("button");
     button.id = "quiz-answer-button";
     button.appendChild(t);
     button.addEventListener('click', function(){
-        this.parentNode.removeChild(this); //first remove answer button once clicked
-        document.getElementById("the-quiz-answer").disabled = true //locks the answer box
-        if (checkAnswer(foundnumber) == true) {
-          var div = document.createElement("div")
+        this.parentNode.removeChild(this);                                    //first remove answer button once clicked
+        document.getElementById("the-quiz-answer").disabled = true            //locks the answer box
+        if (checkAnswer(foundnumber) == true) {                               //if checkAnswer returns true, checkAnswer also logs the result to theWords
+          var div = document.createElement("div")                             //some space     
           div.className = "block-clear";
           document.getElementById("quiz-answer").appendChild(div);
-          var t = document.createTextNode("Correct! Click for next.");
+          var t = document.createTextNode("Correct! Click for next.");        //Hurray! and add button to move on
           var button = document.createElement("button");
           button.id = "quiz-correct-answer-button";
           button.appendChild(t);
-          button.addEventListener('click', function(){
-            quizErazer(); //restarts the quiz for another word after correct
-            quiz(1);
+          button.addEventListener('click', function(){                        //Listener to move to next question
+            quizErazer();                                                     //The listener deletes the quiz elements and starts the quiz over
+            quiz(1);                                                          //Since results are saved in our global array theWords anyway used to start the quiz
           });
           document.getElementById("quiz-answer").appendChild(button);
-        } else {
+        } else {                                                              //Boo! that was wrong!
           var div = document.createElement("div")
           div.className = "block-clear";
           document.getElementById("quiz-answer").appendChild(div);
-          var t = document.createTextNode("Sorry wrong! Click for next.");
+          var t = document.createTextNode("Sorry wrong! Click for next.");    //tell the user he was wrong
           var button = document.createElement("button");
           button.id = "quiz-wrong-answer-button";
           button.appendChild(t);
           button.addEventListener('click', function(){
-            quizErazer(); //restarts the quiz for another word after wrong
+            quizErazer();                                                       //listener to restart the quiz for another word after wrong
             quiz(1);
           });
           document.getElementById("quiz-answer").appendChild(button);
           var div = document.createElement("div")
           div.className = "block-clear";
           document.getElementById("quiz-answer").appendChild(div);
-          var t = document.createTextNode("Correct answer: " + theWords[foundnumber].second);
+          var t = document.createTextNode("Correct answer: " + theWords[foundnumber].second);   //Tells the user what the answer should have been
           var p = document.createElement("p");
           p.className = "the-right-answer";
           p.appendChild(t);
           document.getElementById("quiz-answer").appendChild(p);
-
         };
 
-
       });
-    document.getElementById("quiz-answer").appendChild(button);
+    document.getElementById("quiz-answer").appendChild(button);     //Appends the button that shows either right or wrong answer and moves on
 
 
     } else {
 
-    //clears the quiz and prints final results and end message
+    /** Quiz is complete! Clears the quiz and prints final results and end message */
 
-    quizErazer();
-    var t = document.createTextNode("You have answered all words correct hurray!");
+    quizErazer();                                                                         //first we make sure the slate is clean
+    var t = document.createTextNode("You have answered all words correct hurray!");       //congratulate the user
     var p = document.createElement("p");
     p.className = "quiz-finished";
     p.appendChild(t);
     document.getElementById("quiz-answer").appendChild(p);
 
-    var div = document.createElement("div")
+    var div = document.createElement("div")                                               //add space
     div.className = "block-clear";
     document.getElementById("quiz-answer").appendChild(div);
 
-    var table = document.createElement("table");
+    var table = document.createElement("table");                                          //creates a table. showing languages, words and the number of mistakes per word.
     var tr = document.createElement("tr");
     var td = document.createElement("td");
     var span = document.createElement("span");
@@ -606,7 +611,7 @@ function quiz(choice){
     tr.appendChild(td);
     table.appendChild(tr);
 
-    for (var i = 1; i < theWords.length; i++) {
+    for (var i = 1; i < theWords.length; i++) {                       //one row per word pair
       var tr = document.createElement("tr");
       var td = document.createElement("td");
       var t = document.createTextNode(theWords[i].first);
@@ -624,30 +629,27 @@ function quiz(choice){
     }
     document.getElementById("quiz-answer").appendChild(table);
 
-    var div = document.createElement("div")
+    var div = document.createElement("div");                            //some space
     div.className = "block-clear";
     document.getElementById("quiz-answer").appendChild(div);
 
-    var t = document.createTextNode("Back to start");
+    var t = document.createTextNode("Back to start");                   //return button
     var button = document.createElement("button");
     button.id = "quiz-to-start-button";
     button.appendChild(t);
-    button.addEventListener('click', function(){
+    button.addEventListener('click', function(){                                    //listener to hide quiz view and display input/start view
       quizErazer();
       document.getElementById("quiz-view-container").style.display = "none";
       document.getElementById("start-view-container").style.display = "block";
           });
       document.getElementById("quiz-answer").appendChild(button);
     };
+    break;                //end quiz type 1
 
-
-
-    break;
-
-  default:  //returns to input view if something is wrong
+  default:  //returns to input view if invalid choice of quiz type
     document.getElementById("start-view-container").style.display = "block";
     document.getElementById("quiz-view-container").style.display = "none";
     break;
-  }
+  };
 
 };
