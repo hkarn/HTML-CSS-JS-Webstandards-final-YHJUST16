@@ -415,8 +415,7 @@ function creactetheWords() {
 
 /** Function for starting the quiz sequence */
 function initiateQuiz() {
-  creactetheWords();
-  console.log(theWords);                                                      //build theWord array
+  creactetheWords();                                                  //build theWord array
   if (theWords.length > 1) {                                                  //if there are words else tell the user to input some         
   document.getElementById("start-view-container").style.display = "none";     //hide input word view
   document.getElementById("quiz-view-container").style.display = "block";     //show quiz view
