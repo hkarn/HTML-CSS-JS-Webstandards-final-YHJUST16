@@ -572,7 +572,7 @@ function quiz(choice){
         };
 
       });
-    document.getElementById("quiz-answer").appendChild(button);     //Appends the button that shows either right or wrong answer and moves on
+    document.getElementById("quiz-answer").appendChild(button);     //Appends the answer button
 
 
     } else {
