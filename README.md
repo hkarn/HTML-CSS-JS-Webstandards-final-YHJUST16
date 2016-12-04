@@ -5,7 +5,7 @@
 ### by Håkan Kindström Arnoldson
   * [LinkedIn](https://www.linkedin.com/in/arnoldson)
 
-Live at <https://arnoldson.online/uppgifter/gradingassignment1-YHJUST16/>
+Live at <https://arnoldson.online/projects/vocabulary>
 
 ### Technologies
   * Bootstrap 3.
