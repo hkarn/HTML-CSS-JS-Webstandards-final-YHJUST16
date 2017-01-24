@@ -33,4 +33,4 @@ HTML5 drag and drop function was added as a **hidden feature**. Flag can be drag
   * The [bootstrap languages plugin](https://github.com/usrz/bootstrap-languages) has been edited to display "Other language" rather then "Unknown language"
 <br><br>
 
-  ![alt text](https://files.itslearning.com/data/1821/303/Lernia_logo_orange_liten.jpg "Lernia Logo")
+  ![alt text](http://yhguiden.se/files/school/logo/211/download.png "Lernia Logo")
